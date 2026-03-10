@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brickwise Advisors — Startup Financial Advisory</title>
+  <meta name="description" content="Financial strategy and fractional CFO services for early-stage startups. Fundraising prep, financial modeling, and runway planning for founders.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='22' width='7' height='5' rx='0' fill='%23fff'/><rect x='12' y='22' width='7' height='5' rx='0' fill='%23fff'/><rect x='21' y='22' width='7' height='5' rx='0' fill='%23fff'/><rect x='7' y='15' width='7' height='5' rx='0' fill='%23c4c4c4'/><rect x='17' y='15' width='7' height='5' rx='0' fill='%23c4c4c4'/><rect x='12' y='8' width='7' height='5' rx='0' fill='%23767676'/></svg>">
+
+  <!-- Cormorant Garamond + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --color-bg: #000000;
+      --color-fg: #ffffff;
+      --gray-400: #9b9b9b;
+      --gray-500: #767676;
+      --gray-600: #555555;
+      --gray-800: #1a1a1a;
+      --border: rgba(255,255,255,0.12);
+      --border-subtle: rgba(255,255,255,0.06);
+      --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+      --font-ui: 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --ease-film: cubic-bezier(0.25, 0.1, 0.25, 1);
+      --ease-dramatic: cubic-bezier(0.76, 0, 0.24, 1);
+      --nav-height: 56px;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--color-bg);
+      color: var(--color-fg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Film grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: clamp(24px, 5vw, 80px);
+    }
+
+    /* ══════════════════════════════
+       NAV — transparent, minimal
+       ══════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      transition: background 600ms var(--ease-film);
+    }
+    .nav.scrolled {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 300;
+      color: var(--color-fg);
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-link {
+      font-family: var(--font-ui);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      transition: color 300ms var(--ease-film);
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-fg);
+      transition: width 300ms var(--ease-film);
+    }
+    .nav-link:hover { color: var(--color-fg); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: var(--color-fg); }
+    .nav-link.active::after { width: 100%; }
+
+    .nav-cta {
+      font-family: var(--font-ui);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-fg);
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 300ms var(--ease-film);
+    }
+    .nav-cta:hover { background: var(--color-fg); color: var(--color-bg); }
+
+    /* Mobile toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--color-fg);
+      transition: all 300ms var(--ease-film);
+    }
+    .nav-toggle span + span { margin-top: 6px; }
+    .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 3px); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    /* ══════════════════════════════
+       HERO — full-screen cinematic
+       ══════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 0 clamp(80px, 10vh, 160px);
+      position: relative;
+    }
+    .hero-index {
+      position: absolute;
+      top: clamp(100px, 15vh, 180px);
+      right: clamp(24px, 5vw, 80px);
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--gray-600);
+      writing-mode: vertical-rl;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gray-400);
+    }
+    .hero-sub {
+      font-family: var(--font-ui);
+      font-size: 0.9375rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      font-family: var(--font-ui);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-bg);
+      background: var(--color-fg);
+      padding: 0.875rem 2.25rem;
+      border: 1px solid var(--color-fg);
+      cursor: pointer;
+      transition: all 300ms var(--ease-film);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-primary:hover { background: transparent; color: var(--color-fg); }
+
+    .btn-ghost {
+      font-family: var(--font-ui);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      background: transparent;
+      padding: 0.875rem 2.25rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 300ms var(--ease-film);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-ghost:hover { color: var(--color-fg); border-color: rgba(255,255,255,0.4); }
+
+    .btn-inverse {
+      font-family: var(--font-ui);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-fg);
+      background: transparent;
+      padding: 0.875rem 2.25rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: all 300ms var(--ease-film);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-inverse:hover { background: var(--color-fg); color: var(--color-bg); }
+
+    /* ══════════════════════════════
+       SECTIONS
+       ══════════════════════════════ */
+    .section {
+      padding: clamp(80px, 10vh, 160px) 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .section-index {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .section-label {
+      font-family: var(--font-ui);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.75rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.25rem;
+    }
+    .section-sub {
+      font-size: 0.9375rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+    .section-header-centered {
+      text-align: center;
+      max-width: 640px;
+      margin-inline: auto;
+      margin-bottom: clamp(48px, 6vh, 80px);
+    }
+    .section-header-centered .section-sub {
+      margin-inline: auto;
+    }
+
+    /* ══════════════════════════════
+       STATS
+       ══════════════════════════════ */
+    .stats-strip {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 3.5rem 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .stat {
+      text-align: center;
+      padding: 0 1rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      color: var(--color-fg);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .stat-value-sm {
+      font-family: var(--font-display);
+      font-size: clamp(1.375rem, 2vw, 1.75rem);
+      font-weight: 300;
+      color: var(--color-fg);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+    }
+
+    /* ══════════════════════════════
+       SERVICE CARDS
+       ══════════════════════════════ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .service-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 600ms var(--ease-film);
+      position: relative;
+    }
+    .service-card:hover {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .service-card-num {
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+    }
+    .service-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--color-fg);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .service-card p {
+      font-size: 0.8125rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════
+       ABOUT
+       ══════════════════════════════ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: clamp(32px, 5vw, 80px);
+      align-items: center;
+    }
+    .about-photo {
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/5;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 900ms var(--ease-film);
+    }
+    .about-photo:hover img { filter: grayscale(0%); }
+    .about-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .about-role {
+      font-family: var(--font-ui);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 2rem;
+    }
+
+    /* ══════════════════════════════
+       MOONTOWER
+       ══════════════════════════════ */
+    .moontower {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: clamp(64px, 8vh, 120px) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .moontower::before {
+      content: 'MOONTOWER';
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 12vw, 12rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.02);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: 0.1em;
+    }
+    .moontower-badge {
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.375rem 1rem;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .moontower h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .moontower p {
+      font-size: 0.9375rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-inline: auto;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ══════════════════════════════
+       CTA
+       ══════════════════════════════ */
+    .cta-section {
+      padding: clamp(80px, 10vh, 160px) 0;
+      text-align: center;
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+       ══════════════════════════════ */
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 3rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--color-fg);
+      margin-bottom: 0.75rem;
+    }
+    .footer-desc {
+      font-size: 0.8125rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .footer-heading {
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    .footer-link {
+      font-size: 0.8125rem;
+      color: var(--gray-500);
+      transition: color 300ms var(--ease-film);
+    }
+    .footer-link:hover { color: var(--color-fg); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.5625rem;
+      letter-spacing: 0.15em;
+      color: var(--gray-600);
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════
+       SCROLL REVEAL — cinematic
+       ══════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 900ms var(--ease-dramatic), transform 900ms var(--ease-dramatic);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════ */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; flex-direction: column; }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 3rem 2rem;
+        gap: 1.5rem;
+        z-index: 200;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 600ms var(--ease-dramatic);
+      }
+      .nav-links.open { opacity: 1; pointer-events: auto; }
+      .nav-links .nav-link { font-size: 0.8125rem; letter-spacing: 0.15em; }
+
+      .hero { min-height: 100svh; padding-bottom: 80px; }
+      .hero-index { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 1.5rem; }
+      .stat:nth-last-child(-n+2) { border-bottom: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 360px; margin-inline: auto; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <nav class="nav" id="nav">
+      <div class="container nav-inner">
+        <a href="/" class="nav-brand" aria-label="Brickwise Advisors home">Brickwise Advisors</a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#services"  class="nav-link">Services</a></li>
+          <li><a href="#about"     class="nav-link">About</a></li>
+          <li><a href="#moontower" class="nav-link">Moontower</a></li>
+          <li><a href="#contact"   class="nav-link">Contact</a></li>
+        </ul>
+
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener"
+             class="nav-cta">Book a Call</a>
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-index">Brickwise Advisors — Austin, TX — Est. 2024</div>
+      <div class="container">
+        <h1>The financial<br>edge your <em>startup</em><br>needs</h1>
+        <p class="hero-sub">
+          Fractional CFO and strategic financial partner for early-stage startups.
+          Raise smarter. Grow faster. Never run out of runway.
+        </p>
+        <div class="hero-actions">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="btn-primary">
+            Schedule Consultation
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#services" class="btn-ghost">Our Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-strip">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat reveal">
+            <div class="stat-value-sm">Pre-Seed</div>
+            <div class="stat-label">to Series B</div>
+          </div>
+          <div class="stat reveal reveal-delay-1">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">Startups Advised</div>
+          </div>
+          <div class="stat reveal reveal-delay-2">
+            <div class="stat-value">48h</div>
+            <div class="stat-label">Model Turnaround</div>
+          </div>
+          <div class="stat reveal reveal-delay-3">
+            <div class="stat-value">ATX</div>
+            <div class="stat-label">Born & Building</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header-centered reveal">
+          <div class="section-index">01.</div>
+          <div class="section-label">Services</div>
+          <div class="section-title">Built for founders</div>
+          <p class="section-sub">From your first raise to your Series B, we embed alongside
+            your team as the financial partner that grows with you.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-card-num">01.</div>
+            <h4>Fractional CFO</h4>
+            <p>C-suite financial leadership on a startup budget. Own your numbers,
+              board reporting, investor relations, and long-range strategy.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-card-num">02.</div>
+            <h4>Fundraising Readiness</h4>
+            <p>Pitch-ready financial models, data room structure, investor narrative,
+              and valuation prep — ready to close when VCs come knocking.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-card-num">03.</div>
+            <h4>Financial Modeling</h4>
+            <p>Bottom-up revenue models, scenario analysis, cohort projections,
+              and unit economics dashboards that tell a story investors believe.</p>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-card-num">04.</div>
+            <h4>Cap Table & Equity</h4>
+            <p>Cap table modeling, dilution analysis, option pool planning,
+              and SAFEs/convertible note structuring through every round.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-card-num">05.</div>
+            <h4>Runway & Cash Planning</h4>
+            <p>Real-time burn rate tracking, hiring plan stress-testing, and
+              dynamic runway forecasts for the next 18 months.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-card-num">06.</div>
+            <h4>Finance Ops & Infrastructure</h4>
+            <p>Build your finance stack from day one — FP&A tooling, reporting
+              frameworks, vendor selection, and ops that scale through due diligence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-index reveal">02.</div>
+        <div class="about-grid" style="margin-top:1rem;">
+          <div class="about-photo reveal">
+            <img src="Zac_staff_photo_gift.jpg" alt="Zac, Founder — Brickwise Advisors">
+          </div>
+
+          <div class="reveal reveal-delay-1">
+            <div class="about-role">Founder & Advisor</div>
+            <div class="about-name">A financial partner<br>who speaks founder</div>
+            <p style="font-size:0.9375rem;color:var(--gray-400);line-height:1.75;margin-bottom:1.25rem;">
+              Zac has sat across the table from VCs, built financial models at 2am before
+              board meetings, and helped founders navigate the gap between traction and
+              term sheet.
+            </p>
+            <p style="font-size:0.8125rem;color:var(--gray-500);line-height:1.75;margin-bottom:2.5rem;">
+              As a hands-on advisor with no hidden incentives,
+              Zac's only job is making sure your startup's finances are a strength —
+              not a liability — at every stage from pre-seed through Series B.
+            </p>
+            <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="btn-primary">
+              Book a Free Intro Call
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOONTOWER -->
+    <section id="moontower" class="moontower">
+      <div class="container" style="position:relative;z-index:1;">
+        <div class="section-index reveal" style="text-align:center;">03.</div>
+        <div class="reveal" style="margin-top:1rem;">
+          <div class="moontower-badge">Austin · UT Students</div>
+          <h2>The Moontower Society</h2>
+          <p>
+            An Austin-based organization connecting UT Austin students with the founders,
+            builders, and investors shaping Austin's early-stage tech ecosystem. Curated
+            speaker events, fireside chats, and community programming.
+          </p>
+          <a href="https://moontowersociety.com" target="_blank" rel="noopener" class="btn-inverse">
+            moontowersociety.com
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta-section">
+      <div class="container">
+        <div class="section-index reveal" style="text-align:center;">04.</div>
+        <div class="reveal" style="margin-top:1rem;">
+          <div class="section-label" style="text-align:center;">Contact</div>
+          <div class="section-title" style="text-align:center;max-width:500px;margin-inline:auto;margin-bottom:1rem;">
+            Let's talk about your startup's finances
+          </div>
+          <p class="section-sub" style="text-align:center;max-width:460px;margin-inline:auto;margin-bottom:2.5rem;">
+            Book a free 30-minute intro call. Bring your deck, your burn rate questions,
+            or just a napkin sketch.
+          </p>
+          <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+            <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="btn-primary">
+              Schedule a Call
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="mailto:zac@brickwiseadvisors.com" class="btn-ghost">Send an Email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Brickwise Advisors</div>
+          <p class="footer-desc">
+            Fractional CFO and financial advisory for early-stage startups.
+            Pre-seed to Series B. Austin-based.
+          </p>
+        </div>
+        <div>
+          <div class="footer-heading">Services</div>
+          <ul class="footer-links">
+            <li><a href="#services" class="footer-link">Fractional CFO</a></li>
+            <li><a href="#services" class="footer-link">Fundraising Readiness</a></li>
+            <li><a href="#services" class="footer-link">Financial Modeling</a></li>
+            <li><a href="#services" class="footer-link">Cap Table & Equity</a></li>
+            <li><a href="#services" class="footer-link">Runway Planning</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="#about"     class="footer-link">About Zac</a></li>
+            <li><a href="#moontower" class="footer-link">Moontower Society</a></li>
+            <li><a href="#contact"   class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Connect</div>
+          <ul class="footer-links">
+            <li><a href="https://calendly.com/brickwiseadvisors" class="footer-link" target="_blank" rel="noopener">Book a Call</a></li>
+            <li><a href="mailto:zac@brickwiseadvisors.com" class="footer-link">Email Us</a></li>
+            <li><a href="https://linkedin.com" class="footer-link" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Brickwise Advisors LLC</span>
+        <span>Austin, Texas &middot; Startup Financial Advisory</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 16);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 100;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        const link = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (link) link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+      });
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

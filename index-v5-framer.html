@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brickwise Advisors — Startup Financial Advisory</title>
+  <meta name="description" content="Financial strategy and fractional CFO services for early-stage startups. Fundraising prep, financial modeling, and runway planning for founders.">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='22' width='7' height='5' rx='2' fill='%23E8FF47'/><rect x='12' y='22' width='7' height='5' rx='2' fill='%23E8FF47'/><rect x='21' y='22' width='7' height='5' rx='2' fill='%23E8FF47'/><rect x='7' y='15' width='7' height='5' rx='2' fill='%23fff'/><rect x='17' y='15' width='7' height='5' rx='2' fill='%23fff'/><rect x='12' y='8' width='7' height='5' rx='2' fill='%23666'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --bg: #0A0A0A;
+      --bg2: #141414;
+      --card: #1C1C1C;
+      --fg: #FFFFFF;
+      --fg2: #B3B3B3;
+      --muted: #666666;
+      --accent: #E8FF47;
+      --border: rgba(255,255,255,0.10);
+      --border-s: rgba(255,255,255,0.06);
+      --font-d: 'Syne', sans-serif;
+      --font-b: 'DM Sans', sans-serif;
+      --r-sm: 4px;
+      --r-md: 8px;
+      --r-lg: 12px;
+      --r-xl: 16px;
+      --r-pill: 100px;
+      --ease: 200ms ease;
+      --ease-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      letter-spacing: -0.005em;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: clamp(20px, 4vw, 60px);
+    }
+
+    /* ══════════ NAV ══════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(10, 10, 10, 0.80);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-s);
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-brand {
+      font-family: var(--font-d);
+      font-size: 1.125rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--fg);
+    }
+    .nav-brand span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-link {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      transition: color var(--ease);
+    }
+    .nav-link:hover, .nav-link.active { color: var(--fg); }
+    .nav-cta-btn {
+      font-family: var(--font-b);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--fg);
+      padding: 0.5rem 1rem;
+      border-radius: var(--r-md);
+      transition: all var(--ease);
+    }
+    .nav-cta-btn:hover { background: var(--accent); transform: translateY(-1px); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--fg);
+      border-radius: 1px;
+      transition: all var(--ease);
+    }
+    .nav-toggle span + span { margin-top: 5px; }
+    .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3.5px, 3.5px); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3.5px, -3.5px); }
+
+    /* ══════════ HERO ══════════ */
+    .hero {
+      padding: clamp(80px, 12vw, 160px) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(232,255,71,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: var(--font-d);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(232,255,71,0.12);
+      border: 1px solid rgba(232,255,71,0.25);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--r-pill);
+      margin-bottom: 2rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-family: var(--font-d);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--fg2);
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      font-family: var(--font-b);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--fg);
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--r-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+    .btn-secondary {
+      font-family: var(--font-b);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--fg);
+      background: transparent;
+      padding: 0.6875rem 1.6875rem;
+      border-radius: var(--r-md);
+      border: 1px solid rgba(255,255,255,0.20);
+      cursor: pointer;
+      transition: all var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35); }
+
+    .btn-accent {
+      font-family: var(--font-b);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--r-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-accent:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 0 30px rgba(232,255,71,0.15); }
+
+    /* ══════════ STATS ══════════ */
+    .stats-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 0;
+      background: var(--bg2);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 1.5rem;
+      text-align: center;
+      transition: all var(--ease);
+    }
+    .stat-card:hover { border-color: rgba(232,255,71,0.25); }
+    .stat-value {
+      font-family: var(--font-d);
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--fg);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .stat-value-sm {
+      font-family: var(--font-d);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--fg);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ══════════ SECTIONS ══════════ */
+    .section {
+      padding: clamp(60px, 8vw, 120px) 0;
+    }
+    .section-label {
+      font-family: var(--font-d);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-d);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.0625rem;
+      color: var(--fg2);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+    .section-header-centered {
+      text-align: center;
+      max-width: 640px;
+      margin-inline: auto;
+      margin-bottom: clamp(40px, 5vw, 64px);
+    }
+    .section-header-centered .section-sub { margin-inline: auto; }
+
+    /* ══════════ SERVICE CARDS ══════════ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 1.75rem;
+      transition: all var(--ease);
+    }
+    .service-card:hover {
+      border-color: rgba(255,255,255,0.16);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.12);
+    }
+    .service-card-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(232,255,71,0.12);
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--accent);
+    }
+    .service-card h4 {
+      font-family: var(--font-d);
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--fg2);
+      line-height: 1.6;
+    }
+
+    /* ══════════ ABOUT ══════════ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-photo {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ══════════ MOONTOWER ══════════ */
+    .moontower-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: clamp(2.5rem, 5vw, 4rem);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .moontower-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(232,255,71,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .moontower-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: var(--font-d);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--r-pill);
+      margin-bottom: 1.5rem;
+    }
+    .moontower-card h2 {
+      font-family: var(--font-d);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .moontower-card p {
+      font-size: 1rem;
+      color: var(--fg2);
+      line-height: 1.65;
+      max-width: 520px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+
+    /* ══════════ CTA ══════════ */
+    .cta-section {
+      text-align: center;
+      padding: clamp(60px, 8vw, 120px) 0;
+    }
+
+    /* ══════════ FOOTER ══════════ */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 5rem 0 2.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {
+      font-family: var(--font-d);
+      font-size: 1.125rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 300px;
+    }
+    .footer-heading {
+      font-family: var(--font-d);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    .footer-link {
+      font-size: 0.875rem;
+      color: var(--fg2);
+      transition: color var(--ease);
+    }
+    .footer-link:hover { color: var(--fg); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-s);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ══════════ REVEAL ══════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; flex-direction: column; }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px;
+        left: 0; right: 0; bottom: 0;
+        background: var(--bg);
+        padding: 2rem 1.5rem;
+        gap: 1.25rem;
+        z-index: 200;
+        border-top: 1px solid var(--border);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+      .nav-links.open { opacity: 1; pointer-events: auto; }
+
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 360px; margin-inline: auto; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <nav class="nav" id="nav">
+      <div class="container nav-inner">
+        <a href="/" class="nav-brand">Brick<span>wise</span></a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#services"  class="nav-link">Services</a></li>
+          <li><a href="#about"     class="nav-link">About</a></li>
+          <li><a href="#moontower" class="nav-link">Moontower</a></li>
+          <li><a href="#contact"   class="nav-link">Contact</a></li>
+        </ul>
+
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener"
+             class="nav-cta-btn">Book a Call</a>
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">Austin, Texas · For Founders</div>
+        <h1>The financial<br>edge your<br><em>startup needs</em></h1>
+        <p class="hero-sub">
+          Fractional CFO and strategic financial partner for early-stage startups.
+          Raise smarter. Grow faster. Never run out of runway.
+        </p>
+        <div class="hero-actions">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="btn-primary">
+            Schedule a Free Consultation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#services" class="btn-secondary">See Our Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-strip">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card reveal">
+            <div class="stat-value-sm">Pre-Seed</div>
+            <div class="stat-label">to Series B</div>
+          </div>
+          <div class="stat-card reveal reveal-d1">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">Startups Advised</div>
+          </div>
+          <div class="stat-card reveal reveal-d2">
+            <div class="stat-value">48h</div>
+            <div class="stat-label">Model Turnaround</div>
+          </div>
+          <div class="stat-card reveal reveal-d3">
+            <div class="stat-value">ATX</div>
+            <div class="stat-label">Born & Building</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header-centered reveal">
+          <div class="section-label">What We Do</div>
+          <div class="section-title">Services built<br>for founders</div>
+          <p class="section-sub">From your first raise to your Series B, we embed alongside
+            your team as the financial partner that grows with you.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h4>Fractional CFO</h4>
+            <p>C-suite financial leadership on a startup budget. Own your numbers,
+              board reporting, investor relations, and long-range strategy.</p>
+          </div>
+
+          <div class="service-card reveal reveal-d1">
+            <div class="service-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h4>Fundraising Readiness</h4>
+            <p>Pitch-ready financial models, data room structure, investor narrative,
+              and valuation prep — ready to close when VCs come knocking.</p>
+          </div>
+
+          <div class="service-card reveal reveal-d2">
+            <div class="service-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <h4>Financial Modeling</h4>
+            <p>Bottom-up revenue models, scenario analysis, cohort projections,
+              and unit economics dashboards that tell a story investors believe.</p>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h4>Cap Table & Equity</h4>
+            <p>Cap table modeling, dilution analysis, option pool planning,
+              and SAFEs/convertible note structuring through every round.</p>
+          </div>
+
+          <div class="service-card reveal reveal-d1">
+            <div class="service-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h4>Runway & Cash Planning</h4>
+            <p>Real-time burn rate tracking, hiring plan stress-testing, and
+              dynamic runway forecasts for the next 18 months.</p>
+          </div>
+
+          <div class="service-card reveal reveal-d2">
+            <div class="service-card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            </div>
+            <h4>Finance Ops & Infrastructure</h4>
+            <p>Build your finance stack from day one — FP&A tooling, reporting
+              frameworks, vendor selection, and ops that scale through due diligence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" style="border-top:1px solid var(--border);">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-photo reveal">
+            <img src="Zac_staff_photo_gift.jpg" alt="Zac, Founder — Brickwise Advisors">
+          </div>
+
+          <div class="reveal reveal-d1">
+            <div class="section-label">Meet Zac</div>
+            <div class="section-title" style="margin-bottom:1.25rem;">A financial<br>partner who<br>speaks founder</div>
+            <p style="font-size:1rem;color:var(--fg2);line-height:1.65;margin-bottom:1.25rem;">
+              Zac has sat across the table from VCs, built financial models at 2am before
+              board meetings, and helped founders navigate the gap between traction and
+              term sheet.
+            </p>
+            <p style="font-size:0.875rem;color:var(--muted);line-height:1.65;margin-bottom:2.5rem;">
+              As a hands-on advisor with no hidden incentives,
+              Zac's only job is making sure your startup's finances are a strength —
+              not a liability — at every stage from pre-seed through Series B.
+            </p>
+            <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="btn-accent">
+              Book a Free Intro Call
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOONTOWER -->
+    <section id="moontower" class="section" style="padding-bottom:0;">
+      <div class="container">
+        <div class="moontower-card reveal">
+          <div class="moontower-badge">Austin · UT Students</div>
+          <h2>The Moontower<br>Society</h2>
+          <p>
+            An Austin-based organization connecting UT Austin students with the founders,
+            builders, and investors shaping Austin's early-stage tech ecosystem. Curated
+            speaker events, fireside chats, and community programming.
+          </p>
+          <a href="https://moontowersociety.com" target="_blank" rel="noopener" class="btn-primary">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta-section">
+      <div class="container reveal">
+        <div class="section-label">Get Started</div>
+        <div class="section-title" style="max-width:560px;margin-inline:auto;margin-bottom:1rem;">
+          Let's talk about your startup
+        </div>
+        <p class="section-sub" style="max-width:460px;margin-inline:auto;margin-bottom:2.5rem;text-align:center;">
+          Book a free 30-minute intro call. Bring your deck, your burn rate questions,
+          or just a napkin sketch.
+        </p>
+        <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="btn-accent">
+            Schedule a Call
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="mailto:zac@brickwiseadvisors.com" class="btn-secondary">Send an Email</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Brick<span>wise</span></div>
+          <p class="footer-desc">
+            Fractional CFO and financial advisory for early-stage startups.
+            Pre-seed to Series B. Austin-based, founder-obsessed.
+          </p>
+        </div>
+        <div>
+          <div class="footer-heading">Services</div>
+          <ul class="footer-links">
+            <li><a href="#services" class="footer-link">Fractional CFO</a></li>
+            <li><a href="#services" class="footer-link">Fundraising Readiness</a></li>
+            <li><a href="#services" class="footer-link">Financial Modeling</a></li>
+            <li><a href="#services" class="footer-link">Cap Table & Equity</a></li>
+            <li><a href="#services" class="footer-link">Runway Planning</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="#about"     class="footer-link">About Zac</a></li>
+            <li><a href="#moontower" class="footer-link">Moontower Society</a></li>
+            <li><a href="#contact"   class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Connect</div>
+          <ul class="footer-links">
+            <li><a href="https://calendly.com/brickwiseadvisors" class="footer-link" target="_blank" rel="noopener">Book a Call</a></li>
+            <li><a href="mailto:zac@brickwiseadvisors.com" class="footer-link">Email Us</a></li>
+            <li><a href="https://linkedin.com" class="footer-link" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Brickwise Advisors LLC. All rights reserved.</span>
+        <span>Austin, Texas &middot; Startup Financial Advisory</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 100;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        const link = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (link) link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+      });
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

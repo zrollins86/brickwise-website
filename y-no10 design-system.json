@@ -1,0 +1,508 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$meta": {
+    "name": "Yamauchi No.10 Family Office — Design System",
+    "version": "1.0.0",
+    "source": "https://y-n10.com/",
+    "extracted": "2026-03-05",
+    "author": "mount inc. (米道昌弘)",
+    "awards": ["Awwwards SOTD May 2021", "CSS Design Awards WOTY 2021 Nominee"],
+    "description": "Reverse-engineered design token set. A strict monochrome Japanese editorial system built around cinematic storytelling, full-screen scroll architecture, and bilingual (JP/EN) typographic hierarchy."
+  },
+
+  "color": {
+    "$description": "Monochrome palette — the site uses exactly 1 chromatic color (#000). All UI is achieved through black, white, and opacity.",
+    "black": {
+      "$value": "#000000",
+      "$type": "color",
+      "$description": "Primary background. Site background, section fills, navigation bar."
+    },
+    "white": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "Primary foreground. All body text, headings, UI labels."
+    },
+    "gray": {
+      "50":  { "$value": "#f9f9f9", "$type": "color" },
+      "100": { "$value": "#f0f0f0", "$type": "color" },
+      "200": { "$value": "#e0e0e0", "$type": "color" },
+      "300": { "$value": "#c4c4c4", "$type": "color" },
+      "400": { "$value": "#9b9b9b", "$type": "color" },
+      "500": { "$value": "#767676", "$type": "color" },
+      "600": { "$value": "#555555", "$type": "color" },
+      "700": { "$value": "#333333", "$type": "color" },
+      "800": { "$value": "#1a1a1a", "$type": "color" },
+      "900": { "$value": "#0d0d0d", "$type": "color" }
+    },
+    "semantic": {
+      "background": {
+        "primary":   { "$value": "{color.black}", "$type": "color" },
+        "secondary": { "$value": "{color.gray.900}", "$type": "color" },
+        "surface":   { "$value": "{color.gray.800}", "$type": "color" },
+        "overlay":   { "$value": "rgba(0,0,0,0.8)", "$type": "color" }
+      },
+      "text": {
+        "primary":   { "$value": "{color.white}", "$type": "color" },
+        "secondary": { "$value": "{color.gray.400}", "$type": "color" },
+        "muted":     { "$value": "{color.gray.600}", "$type": "color" },
+        "inverted":  { "$value": "{color.black}", "$type": "color" }
+      },
+      "border": {
+        "default":   { "$value": "rgba(255,255,255,0.12)", "$type": "color" },
+        "subtle":    { "$value": "rgba(255,255,255,0.06)", "$type": "color" },
+        "strong":    { "$value": "rgba(255,255,255,0.3)", "$type": "color" }
+      },
+      "interactive": {
+        "default":   { "$value": "{color.white}", "$type": "color" },
+        "hover":     { "$value": "{color.gray.300}", "$type": "color" },
+        "active":    { "$value": "{color.gray.100}", "$type": "color" }
+      }
+    },
+    "opacity": {
+      "10":  { "$value": "0.10", "$type": "number" },
+      "20":  { "$value": "0.20", "$type": "number" },
+      "30":  { "$value": "0.30", "$type": "number" },
+      "50":  { "$value": "0.50", "$type": "number" },
+      "70":  { "$value": "0.70", "$type": "number" },
+      "85":  { "$value": "0.85", "$type": "number" },
+      "100": { "$value": "1.00", "$type": "number" }
+    }
+  },
+
+  "typography": {
+    "$description": "Bilingual type system. English display uses a high-contrast editorial serif or geometric grotesque for impact. Japanese text uses Noto Serif JP for cultural authenticity. Section labels use a monospaced tabular style for the numbered index aesthetic.",
+    "fontFamily": {
+      "display": {
+        "$value": "'Cormorant Garamond', 'Times New Roman', serif",
+        "$type": "fontFamily",
+        "$description": "English display headings. High-contrast editorial serif. Pairs with Japanese body."
+      },
+      "displayAlt": {
+        "$value": "'Helvetica Neue', 'Neue Haas Grotesk', Arial, sans-serif",
+        "$type": "fontFamily",
+        "$description": "Section number labels, sub-headings, UI text. Clean grotesque."
+      },
+      "japanese": {
+        "$value": "'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif",
+        "$type": "fontFamily",
+        "$description": "Japanese body and heading text. Serif for luxury/editorial tone."
+      },
+      "japaneseUI": {
+        "$value": "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif",
+        "$type": "fontFamily",
+        "$description": "Japanese UI labels, navigation, smaller text."
+      },
+      "mono": {
+        "$value": "'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace",
+        "$type": "fontFamily",
+        "$description": "Section index numbers (01, 02, 03, 04). Tabular numerals."
+      },
+      "body": {
+        "$value": "'Noto Serif JP', Georgia, serif",
+        "$type": "fontFamily",
+        "$description": "Body text default. Unified Japanese/English reading experience."
+      }
+    },
+    "fontSize": {
+      "$description": "Scale based on a 16px root. Uses fluid/clamp sizing at display level.",
+      "2xs": { "$value": "0.625rem", "$type": "dimension", "$px": "10px" },
+      "xs":  { "$value": "0.75rem",  "$type": "dimension", "$px": "12px" },
+      "sm":  { "$value": "0.875rem", "$type": "dimension", "$px": "14px" },
+      "base":{ "$value": "1rem",     "$type": "dimension", "$px": "16px" },
+      "md":  { "$value": "1.125rem", "$type": "dimension", "$px": "18px" },
+      "lg":  { "$value": "1.25rem",  "$type": "dimension", "$px": "20px" },
+      "xl":  { "$value": "1.5rem",   "$type": "dimension", "$px": "24px" },
+      "2xl": { "$value": "1.875rem", "$type": "dimension", "$px": "30px" },
+      "3xl": { "$value": "2.25rem",  "$type": "dimension", "$px": "36px" },
+      "4xl": { "$value": "3rem",     "$type": "dimension", "$px": "48px" },
+      "5xl": { "$value": "3.75rem",  "$type": "dimension", "$px": "60px" },
+      "6xl": { "$value": "4.5rem",   "$type": "dimension", "$px": "72px" },
+      "7xl": { "$value": "6rem",     "$type": "dimension", "$px": "96px" },
+      "8xl": { "$value": "8rem",     "$type": "dimension", "$px": "128px" },
+      "9xl": { "$value": "10rem",    "$type": "dimension", "$px": "160px" },
+      "display": {
+        "$value": "clamp(3.75rem, 8vw, 10rem)",
+        "$type": "dimension",
+        "$description": "Hero/section display headings — fluid responsive"
+      }
+    },
+    "fontWeight": {
+      "thin":       { "$value": "100", "$type": "fontWeight" },
+      "extralight": { "$value": "200", "$type": "fontWeight" },
+      "light":      { "$value": "300", "$type": "fontWeight" },
+      "regular":    { "$value": "400", "$type": "fontWeight" },
+      "medium":     { "$value": "500", "$type": "fontWeight" },
+      "semibold":   { "$value": "600", "$type": "fontWeight" },
+      "bold":       { "$value": "700", "$type": "fontWeight" },
+      "extrabold":  { "$value": "800", "$type": "fontWeight" },
+      "black":      { "$value": "900", "$type": "fontWeight" }
+    },
+    "lineHeight": {
+      "none":    { "$value": "1",    "$type": "number" },
+      "tight":   { "$value": "1.1",  "$type": "number" },
+      "snug":    { "$value": "1.3",  "$type": "number" },
+      "normal":  { "$value": "1.5",  "$type": "number" },
+      "relaxed": { "$value": "1.7",  "$type": "number" },
+      "loose":   { "$value": "2.0",  "$type": "number" },
+      "japanese":{ "$value": "1.9",  "$type": "number", "$description": "Optimal line height for Japanese vertical/horizontal text" }
+    },
+    "letterSpacing": {
+      "tighter":  { "$value": "-0.05em",  "$type": "dimension" },
+      "tight":    { "$value": "-0.025em", "$type": "dimension" },
+      "normal":   { "$value": "0em",      "$type": "dimension" },
+      "wide":     { "$value": "0.05em",   "$type": "dimension" },
+      "wider":    { "$value": "0.1em",    "$type": "dimension" },
+      "widest":   { "$value": "0.2em",    "$type": "dimension" },
+      "expanded": { "$value": "0.3em",    "$type": "dimension", "$description": "Section labels (ACTIVITIES, LEADERSHIP, etc.)" }
+    },
+    "textStyle": {
+      "heroDisplay": {
+        "fontFamily":    "display",
+        "fontSize":      "display",
+        "fontWeight":    "light",
+        "lineHeight":    "tight",
+        "letterSpacing": "tighter",
+        "$description":  "Main hero text: 'Yamauchi No.10 Family Office'"
+      },
+      "sectionIndex": {
+        "fontFamily":    "mono",
+        "fontSize":      "sm",
+        "fontWeight":    "regular",
+        "lineHeight":    "none",
+        "letterSpacing": "widest",
+        "$description":  "Section numbers: '01.', '02.', '03.', '04.'"
+      },
+      "sectionTitle": {
+        "fontFamily":    "display",
+        "fontSize":      "5xl",
+        "fontWeight":    "light",
+        "lineHeight":    "snug",
+        "letterSpacing": "tight",
+        "$description":  "'Dream. Leap. Live.' — English section titles"
+      },
+      "sectionTitleJP": {
+        "fontFamily":    "japanese",
+        "fontSize":      "3xl",
+        "fontWeight":    "light",
+        "lineHeight":    "snug",
+        "letterSpacing": "wide",
+        "$description":  "'挑戦と、生きていく。' — Japanese section titles"
+      },
+      "categoryLabel": {
+        "fontFamily":    "displayAlt",
+        "fontSize":      "xs",
+        "fontWeight":    "regular",
+        "lineHeight":    "none",
+        "letterSpacing": "expanded",
+        "$description":  "Uppercase labels: 'ACTIVITIES', 'LEADERSHIP', 'CONTACT'"
+      },
+      "bodyEN": {
+        "fontFamily":    "body",
+        "fontSize":      "base",
+        "fontWeight":    "regular",
+        "lineHeight":    "relaxed",
+        "letterSpacing": "normal"
+      },
+      "bodyJP": {
+        "fontFamily":    "japanese",
+        "fontSize":      "base",
+        "fontWeight":    "regular",
+        "lineHeight":    "japanese",
+        "letterSpacing": "wide"
+      },
+      "navItem": {
+        "fontFamily":    "displayAlt",
+        "fontSize":      "xs",
+        "fontWeight":    "regular",
+        "lineHeight":    "none",
+        "letterSpacing": "wider"
+      },
+      "personName": {
+        "fontFamily":    "display",
+        "fontSize":      "2xl",
+        "fontWeight":    "light",
+        "lineHeight":    "tight",
+        "letterSpacing": "normal"
+      },
+      "personRole": {
+        "fontFamily":    "displayAlt",
+        "fontSize":      "xs",
+        "fontWeight":    "regular",
+        "lineHeight":    "normal",
+        "letterSpacing": "expanded"
+      }
+    }
+  },
+
+  "spacing": {
+    "$description": "4px base unit. Scale follows 4–8–12–16–24–32–48–64–96–128–160–192–256.",
+    "base": { "$value": "4px", "$type": "dimension" },
+    "1":  { "$value": "4px",   "$type": "dimension" },
+    "2":  { "$value": "8px",   "$type": "dimension" },
+    "3":  { "$value": "12px",  "$type": "dimension" },
+    "4":  { "$value": "16px",  "$type": "dimension" },
+    "5":  { "$value": "20px",  "$type": "dimension" },
+    "6":  { "$value": "24px",  "$type": "dimension" },
+    "8":  { "$value": "32px",  "$type": "dimension" },
+    "10": { "$value": "40px",  "$type": "dimension" },
+    "12": { "$value": "48px",  "$type": "dimension" },
+    "14": { "$value": "56px",  "$type": "dimension" },
+    "16": { "$value": "64px",  "$type": "dimension" },
+    "20": { "$value": "80px",  "$type": "dimension" },
+    "24": { "$value": "96px",  "$type": "dimension" },
+    "32": { "$value": "128px", "$type": "dimension" },
+    "40": { "$value": "160px", "$type": "dimension" },
+    "48": { "$value": "192px", "$type": "dimension" },
+    "64": { "$value": "256px", "$type": "dimension" }
+  },
+
+  "layout": {
+    "container": {
+      "xs":    { "$value": "480px",  "$type": "dimension" },
+      "sm":    { "$value": "640px",  "$type": "dimension" },
+      "md":    { "$value": "768px",  "$type": "dimension" },
+      "lg":    { "$value": "1024px", "$type": "dimension" },
+      "xl":    { "$value": "1280px", "$type": "dimension" },
+      "2xl":   { "$value": "1440px", "$type": "dimension", "$description": "Primary design width" },
+      "3xl":   { "$value": "1920px", "$type": "dimension" },
+      "full":  { "$value": "100%",   "$type": "dimension" }
+    },
+    "breakpoint": {
+      "mobile":  { "$value": "390px",  "$type": "dimension", "$description": "iPhone 14 portrait baseline" },
+      "tablet":  { "$value": "768px",  "$type": "dimension" },
+      "desktop": { "$value": "1024px", "$type": "dimension" },
+      "wide":    { "$value": "1280px", "$type": "dimension" },
+      "ultra":   { "$value": "1440px", "$type": "dimension", "$description": "Primary design breakpoint" }
+    },
+    "section": {
+      "height":      { "$value": "100vh", "$type": "dimension", "$description": "Full-screen section height" },
+      "minHeight":   { "$value": "100dvh","$type": "dimension" },
+      "paddingX":    { "$value": "clamp(24px, 5vw, 80px)", "$type": "dimension" },
+      "paddingY":    { "$value": "clamp(80px, 10vh, 160px)", "$type": "dimension" }
+    },
+    "grid": {
+      "columns":  { "$value": "12",  "$type": "number" },
+      "gutter":   { "$value": "32px", "$type": "dimension" },
+      "gutterMobile": { "$value": "16px", "$type": "dimension" }
+    }
+  },
+
+  "border": {
+    "width": {
+      "none":   { "$value": "0px",   "$type": "dimension" },
+      "thin":   { "$value": "1px",   "$type": "dimension" },
+      "medium": { "$value": "2px",   "$type": "dimension" },
+      "thick":  { "$value": "4px",   "$type": "dimension" }
+    },
+    "radius": {
+      "none":   { "$value": "0px",   "$type": "dimension", "$description": "Dominant radius — site uses zero radius (sharp corners)" },
+      "sm":     { "$value": "2px",   "$type": "dimension" },
+      "md":     { "$value": "4px",   "$type": "dimension" },
+      "lg":     { "$value": "8px",   "$type": "dimension" },
+      "full":   { "$value": "9999px","$type": "dimension" }
+    },
+    "default": {
+      "$value": "1px solid rgba(255,255,255,0.12)",
+      "$type":  "border"
+    },
+    "section": {
+      "$value": "1px solid rgba(255,255,255,0.08)",
+      "$type":  "border",
+      "$description": "Horizontal rule between sections"
+    }
+  },
+
+  "shadow": {
+    "$description": "Dark-background site uses minimal shadows. Depth is achieved through opacity and blending.",
+    "none":   { "$value": "none", "$type": "shadow" },
+    "text": {
+      "subtle": { "$value": "0 2px 20px rgba(0,0,0,0.5)", "$type": "shadow" }
+    },
+    "glow": {
+      "white": { "$value": "0 0 40px rgba(255,255,255,0.08)", "$type": "shadow" }
+    }
+  },
+
+  "motion": {
+    "$description": "Cinematic, deliberate transitions. Inspired by film editing principles. No bouncy or springy easing — smooth, weighty, intentional.",
+    "duration": {
+      "instant":  { "$value": "0ms",    "$type": "duration" },
+      "fast":     { "$value": "150ms",  "$type": "duration" },
+      "normal":   { "$value": "300ms",  "$type": "duration" },
+      "slow":     { "$value": "600ms",  "$type": "duration" },
+      "slower":   { "$value": "900ms",  "$type": "duration" },
+      "cinematic":{ "$value": "1200ms", "$type": "duration", "$description": "Page transitions, section reveals" },
+      "epic":     { "$value": "2000ms", "$type": "duration", "$description": "Splash screen, WebGL intro" }
+    },
+    "easing": {
+      "linear":      { "$value": "linear", "$type": "cubicBezier" },
+      "ease":        { "$value": "ease", "$type": "cubicBezier" },
+      "easeIn":      { "$value": "cubic-bezier(0.4, 0, 1, 1)", "$type": "cubicBezier" },
+      "easeOut":     { "$value": "cubic-bezier(0, 0, 0.2, 1)", "$type": "cubicBezier" },
+      "easeInOut":   { "$value": "cubic-bezier(0.4, 0, 0.2, 1)", "$type": "cubicBezier" },
+      "film":        { "$value": "cubic-bezier(0.25, 0.1, 0.25, 1)", "$type": "cubicBezier", "$description": "Primary easing — film-like smoothness" },
+      "dramatic":    { "$value": "cubic-bezier(0.76, 0, 0.24, 1)", "$type": "cubicBezier", "$description": "Dramatic reveals, splash transitions" },
+      "decelerate":  { "$value": "cubic-bezier(0, 0, 0.35, 1)", "$type": "cubicBezier", "$description": "Elements settling into position" }
+    },
+    "pattern": {
+      "fadeIn":           "opacity 0 → 1, duration: cinematic, easing: film",
+      "slideUp":          "translateY(40px) → translateY(0), opacity 0 → 1, duration: slower, easing: dramatic",
+      "textReveal":       "clipPath inset(100% 0 0 0) → inset(0%), duration: cinematic, easing: dramatic",
+      "pageTransition":   "Full-screen black overlay, 1200ms fade, sequential section reveals",
+      "scrollParallax":   "Background elements move at 0.5x scroll speed",
+      "hoverUnderline":   "width 0% → 100% on ::after pseudo, 300ms ease",
+      "enterButton":      "Ring expand + fade on hover, cursor changes to pointer",
+      "sectionNumber":    "Staggered reveal as section scrolls into view, 800ms delay per element"
+    }
+  },
+
+  "zIndex": {
+    "hide":     { "$value": "-1",  "$type": "number" },
+    "base":     { "$value": "0",   "$type": "number" },
+    "raised":   { "$value": "10",  "$type": "number" },
+    "overlay":  { "$value": "100", "$type": "number" },
+    "modal":    { "$value": "200", "$type": "number" },
+    "toast":    { "$value": "300", "$type": "number" },
+    "cursor":   { "$value": "999", "$type": "number" },
+    "webgl":    { "$value": "0",   "$type": "number", "$description": "WebGL canvas renders behind content" },
+    "nav":      { "$value": "50",  "$type": "number" },
+    "splash":   { "$value": "500", "$type": "number" }
+  },
+
+  "component": {
+    "nav": {
+      "height":       "48px",
+      "position":     "fixed",
+      "top":          "0",
+      "background":   "transparent",
+      "backdropFilter":"none",
+      "items":        ["Statement", "Legacy", "Philosophy", "About"],
+      "socialLinks":  ["Twitter", "Facebook", "LinkedIn"],
+      "controls":     ["View", "Sound"],
+      "typography":   "navItem",
+      "color":        "text.primary"
+    },
+    "splashScreen": {
+      "background":   "color.black",
+      "content":      ["logo", "Since 2020", "Enter CTA", "Sound notice JP/EN"],
+      "enterButton": {
+        "shape":      "circle or text link",
+        "typography": "categoryLabel",
+        "animation":  "Ring pulse on hover"
+      }
+    },
+    "sectionHeader": {
+      "indexNumber":  { "style": "sectionIndex", "example": "01." },
+      "titleJP":      { "style": "sectionTitleJP" },
+      "titleEN":      { "style": "sectionTitle" },
+      "spacing":      { "betweenIndex": "spacing.4", "betweenTitles": "spacing.6" }
+    },
+    "philosophyCard": {
+      "layout":       "list with large number index",
+      "number":       { "size": "7xl", "opacity": "0.15", "font": "displayAlt" },
+      "body":         { "style": "bodyJP + bodyEN paired" },
+      "border":       "border.section (top)",
+      "padding":      "spacing.12 spacing.8"
+    },
+    "personCard": {
+      "layout":       "list item, not grid card",
+      "roleLabel":    { "style": "personRole", "letterSpacing": "expanded" },
+      "nameJP":       { "style": "japanese 2xl" },
+      "nameEN":       { "style": "personName" },
+      "bio":          { "style": "bodyEN sm" },
+      "border":       "border.section (top)",
+      "hover":        "subtle opacity shift 1.0 → 0.7"
+    },
+    "contactSection": {
+      "layout":       "minimal, centered or left-aligned",
+      "label":        "MAIL",
+      "linkStyle":    { "fontFamily": "displayAlt", "letterSpacing": "wider" },
+      "hoverEffect":  "underline slide-in"
+    },
+    "footer": {
+      "background":   "color.black",
+      "logo":         "Full wordmark",
+      "navItems":     ["Statement", "Legacy", "Philosophy", "About"],
+      "social":       ["Twitter", "Facebook", "LinkedIn"],
+      "controls":     ["View", "Sound"],
+      "border":       "border.section (top)"
+    }
+  },
+
+  "iconography": {
+    "style":          "minimal line / no fill",
+    "size":           "16px × 16px standard",
+    "socialIcons":    "Text links only — no icon glyphs",
+    "arrowStyle":     "Thin single-line arrows for navigation hints",
+    "soundIcon":      "Abstract waveform or text toggle",
+    "strokeWidth":    "1px"
+  },
+
+  "texture": {
+    "filmGrain": {
+      "$description": "Subtle SVG noise overlay at ~4% opacity to add cinematic texture",
+      "opacity":    "0.04",
+      "blendMode":  "overlay",
+      "implementation": "CSS: background-image: url(noise.svg); background-repeat: repeat; pointer-events: none; position: fixed;"
+    },
+    "webgl": {
+      "$description": "3D particle/mesh background rendered in WebGL, responds to scroll and mouse",
+      "technology":  "Three.js or custom WebGL",
+      "zIndex":      "0 (behind content)"
+    }
+  },
+
+  "cssVariables": {
+    "$description": "Ready-to-paste CSS custom properties for :root",
+    "raw": [
+      "--color-bg: #000000;",
+      "--color-fg: #ffffff;",
+      "--color-gray-400: #9b9b9b;",
+      "--color-gray-600: #555555;",
+      "--color-border: rgba(255,255,255,0.12);",
+      "--font-display: 'Cormorant Garamond', 'Times New Roman', serif;",
+      "--font-display-alt: 'Helvetica Neue', 'Arial', sans-serif;",
+      "--font-japanese: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;",
+      "--font-mono: 'JetBrains Mono', 'Courier New', monospace;",
+      "--font-body: var(--font-japanese);",
+      "--size-display: clamp(3.75rem, 8vw, 10rem);",
+      "--size-section-title: clamp(2.25rem, 5vw, 4.5rem);",
+      "--tracking-expanded: 0.3em;",
+      "--tracking-wider: 0.1em;",
+      "--leading-japanese: 1.9;",
+      "--leading-tight: 1.1;",
+      "--section-px: clamp(24px, 5vw, 80px);",
+      "--section-py: clamp(80px, 10vh, 160px);",
+      "--transition-film: 300ms cubic-bezier(0.25, 0.1, 0.25, 1);",
+      "--transition-cinematic: 1200ms cubic-bezier(0.76, 0, 0.24, 1);",
+      "--z-nav: 50;",
+      "--z-splash: 500;"
+    ]
+  },
+
+  "tailwindConfig": {
+    "$description": "Tailwind CSS v3 config extension object",
+    "extend": {
+      "colors": {
+        "yn10": {
+          "black":  "#000000",
+          "white":  "#ffffff",
+          "gray":   { "400": "#9b9b9b", "600": "#555555", "800": "#1a1a1a" }
+        }
+      },
+      "fontFamily": {
+        "display":   ["Cormorant Garamond", "Times New Roman", "serif"],
+        "sans-jp":   ["Noto Sans JP", "Hiragino Kaku Gothic ProN", "sans-serif"],
+        "serif-jp":  ["Noto Serif JP", "Hiragino Mincho ProN", "serif"],
+        "mono":      ["JetBrains Mono", "Courier New", "monospace"]
+      },
+      "letterSpacing": {
+        "expanded": "0.3em",
+        "widest":   "0.2em"
+      },
+      "transitionDuration": {
+        "cinematic": "1200ms"
+      }
+    }
+  }
+}

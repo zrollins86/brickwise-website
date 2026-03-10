@@ -1,0 +1,735 @@
+{
+  "_meta": {
+    "name": "Maggie App Design System",
+    "version": "1.0.0",
+    "description": "Design tokens reverse-engineered from maggie-app.com — a Framer-built parenting app landing page. Features BN Dime Heavy display typography, warm cream backgrounds, and a playful green/yellow/pink palette.",
+    "source": "https://maggie-app.com",
+    "platform": "Framer",
+    "extracted": "2026-03-05"
+  },
+
+  "color": {
+    "brand": {
+      "green": {
+        "50":  { "value": "#F0F9F3", "hex": "#F0F9F3", "note": "Lightest green tint" },
+        "100": { "value": "#D1EDDB", "hex": "#D1EDDB" },
+        "200": { "value": "#A3DDB7", "hex": "#A3DDB7" },
+        "300": { "value": "#6AC98E", "hex": "#6AC98E" },
+        "400": { "value": "#44B56F", "hex": "#44B56F" },
+        "500": { "value": "#2EA858", "hex": "#2EA858", "note": "Primary green — main brand accent" },
+        "600": { "value": "#238A45", "hex": "#238A45" },
+        "700": { "value": "#1A6C34", "hex": "#1A6C34" },
+        "800": { "value": "#124D24", "hex": "#124D24" },
+        "900": { "value": "#0A2E15", "hex": "#0A2E15" }
+      },
+      "yellow": {
+        "50":  { "value": "#FFFCEB", "hex": "#FFFCEB" },
+        "100": { "value": "#FEF6C2", "hex": "#FEF6C2" },
+        "200": { "value": "#FEEE85", "hex": "#FEEE85" },
+        "300": { "value": "#FDE44A", "hex": "#FDE44A" },
+        "400": { "value": "#F5D720", "hex": "#F5D720", "note": "Primary yellow — energy & warmth" },
+        "500": { "value": "#DFB800", "hex": "#DFB800" },
+        "600": { "value": "#B89100", "hex": "#B89100" },
+        "700": { "value": "#906D00", "hex": "#906D00" },
+        "800": { "value": "#684D00", "hex": "#684D00" },
+        "900": { "value": "#402E00", "hex": "#402E00" }
+      },
+      "pink": {
+        "50":  { "value": "#FFF0F4", "hex": "#FFF0F4" },
+        "100": { "value": "#FFD7E3", "hex": "#FFD7E3" },
+        "200": { "value": "#FFAFC7", "hex": "#FFAFC7" },
+        "300": { "value": "#FF87AB", "hex": "#FF87AB" },
+        "400": { "value": "#F5618F", "hex": "#F5618F", "note": "Primary pink — playful accent" },
+        "500": { "value": "#E03D72", "hex": "#E03D72" },
+        "600": { "value": "#BD1F58", "hex": "#BD1F58" },
+        "700": { "value": "#951441", "hex": "#951441" },
+        "800": { "value": "#6D0D2E", "hex": "#6D0D2E" },
+        "900": { "value": "#45081D", "hex": "#45081D" }
+      }
+    },
+    "neutral": {
+      "0":   { "value": "#FFFFFF", "hex": "#FFFFFF", "note": "White" },
+      "50":  { "value": "#FFFEF9", "hex": "#FFFEF9", "note": "Off-white warm" },
+      "100": { "value": "#FAF8F2", "hex": "#FAF8F2", "note": "Warm cream — primary background" },
+      "150": { "value": "#F4F1E8", "hex": "#F4F1E8", "note": "Slightly deeper cream" },
+      "200": { "value": "#EDE8DB", "hex": "#EDE8DB", "note": "Light warm gray" },
+      "300": { "value": "#D8D2C4", "hex": "#D8D2C4" },
+      "400": { "value": "#B8B0A0", "hex": "#B8B0A0" },
+      "500": { "value": "#908880", "hex": "#908880" },
+      "600": { "value": "#6C6460", "hex": "#6C6460" },
+      "700": { "value": "#504A48", "hex": "#504A48" },
+      "800": { "value": "#302C2A", "hex": "#302C2A" },
+      "900": { "value": "#1A1814", "hex": "#1A1814", "note": "Primary text — warm near-black" },
+      "950": { "value": "#0D0B08", "hex": "#0D0B08", "note": "True near-black" }
+    },
+    "semantic": {
+      "success": { "value": "#2EA858", "hex": "#2EA858", "note": "Uses brand green" },
+      "successLight": { "value": "#F0F9F3", "hex": "#F0F9F3" },
+      "warning": { "value": "#F5D720", "hex": "#F5D720", "note": "Uses brand yellow" },
+      "warningLight": { "value": "#FFFCEB", "hex": "#FFFCEB" },
+      "error": { "value": "#E03D72", "hex": "#E03D72", "note": "Uses brand pink" },
+      "errorLight": { "value": "#FFF0F4", "hex": "#FFF0F4" },
+      "info": { "value": "#3B7FE8", "hex": "#3B7FE8" },
+      "infoLight": { "value": "#EFF4FE", "hex": "#EFF4FE" }
+    },
+    "background": {
+      "primary": { "value": "#FAF8F2", "hex": "#FAF8F2", "note": "Main page background — warm cream" },
+      "secondary": { "value": "#F4F1E8", "hex": "#F4F1E8", "note": "Section alternate background" },
+      "inverse": { "value": "#1A1814", "hex": "#1A1814", "note": "Dark section background" },
+      "card": { "value": "#FFFFFF", "hex": "#FFFFFF" },
+      "cardMuted": { "value": "#FAF8F2", "hex": "#FAF8F2" },
+      "greenBand": { "value": "#D1EDDB", "hex": "#D1EDDB", "note": "Green ticker/marquee band" },
+      "yellowBand": { "value": "#FEF6C2", "hex": "#FEF6C2", "note": "Yellow highlight band" }
+    },
+    "text": {
+      "primary": { "value": "#1A1814", "hex": "#1A1814", "note": "Body text, default" },
+      "secondary": { "value": "#6C6460", "hex": "#6C6460", "note": "Muted / subtext" },
+      "tertiary": { "value": "#908880", "hex": "#908880", "note": "Placeholder / disabled" },
+      "inverse": { "value": "#FFFEF9", "hex": "#FFFEF9", "note": "Text on dark backgrounds" },
+      "accent": { "value": "#2EA858", "hex": "#2EA858", "note": "Links and highlighted text" }
+    },
+    "border": {
+      "subtle": { "value": "#EDE8DB", "hex": "#EDE8DB" },
+      "default": { "value": "#D8D2C4", "hex": "#D8D2C4" },
+      "strong": { "value": "#1A1814", "hex": "#1A1814", "note": "Dark border — used for buttons" }
+    },
+    "gradient": {
+      "heroFade": "linear-gradient(to bottom, transparent 0%, rgba(250, 248, 242, 0.6) 100%)",
+      "greenSoft": "linear-gradient(135deg, #D1EDDB 0%, #A3DDB7 100%)",
+      "yellowWarm": "linear-gradient(135deg, #FFFCEB 0%, #FEF6C2 100%)",
+      "pinkSoft": "linear-gradient(135deg, #FFF0F4 0%, #FFD7E3 100%)",
+      "textMask": "linear-gradient(to right, #1A1814 0%, #504A48 100%)"
+    }
+  },
+
+  "typography": {
+    "fontFamily": {
+      "display": {
+        "value": "'BN Dime Heavy', 'Times New Roman', Georgia, serif",
+        "note": "Primary display/heading font — high contrast editorial serif with heavy weight. Used for all major headings.",
+        "source": "BN Dime by Brandon Nickerson",
+        "googleFontsAlternative": null,
+        "fallback": "'Times New Roman', Georgia, serif"
+      },
+      "body": {
+        "value": "'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+        "note": "Body copy, UI labels, navigation, captions",
+        "googleFontsUrl": "https://fonts.google.com/specimen/DM+Sans"
+      },
+      "mono": {
+        "value": "'JetBrains Mono', 'Courier New', Courier, monospace",
+        "note": "Code snippets or token values"
+      }
+    },
+    "fontWeight": {
+      "regular":    { "value": 400 },
+      "medium":     { "value": 500 },
+      "semibold":   { "value": 600 },
+      "bold":       { "value": 700 },
+      "extrabold":  { "value": 800 },
+      "heavy":      { "value": 900, "note": "Used with BN Dime Heavy display font" }
+    },
+    "fontSize": {
+      "xs":   { "value": "0.75rem",  "px": "12px",  "note": "Small labels, badges" },
+      "sm":   { "value": "0.875rem", "px": "14px",  "note": "Captions, legal text, navigation items" },
+      "base": { "value": "1rem",     "px": "16px",  "note": "Body text default" },
+      "md":   { "value": "1.125rem", "px": "18px",  "note": "Large body, intro text" },
+      "lg":   { "value": "1.25rem",  "px": "20px",  "note": "Section subtitles" },
+      "xl":   { "value": "1.5rem",   "px": "24px",  "note": "Small display text" },
+      "2xl":  { "value": "2rem",     "px": "32px",  "note": "H3 equivalent" },
+      "3xl":  { "value": "2.5rem",   "px": "40px",  "note": "H2 equivalent" },
+      "4xl":  { "value": "3.5rem",   "px": "56px",  "note": "H1 standard" },
+      "5xl":  { "value": "4.5rem",   "px": "72px",  "note": "H1 large — hero on desktop" },
+      "6xl":  { "value": "6rem",     "px": "96px",  "note": "Oversized display" },
+      "7xl":  { "value": "8rem",     "px": "128px", "note": "Hero mega display — 'FIND'" },
+      "8xl":  { "value": "11rem",    "px": "176px", "note": "Max editorial display — full-bleed" }
+    },
+    "lineHeight": {
+      "none":    { "value": 1,    "note": "Display headlines — tight" },
+      "tighter": { "value": 1.05, "note": "Large hero text" },
+      "tight":   { "value": 1.15, "note": "Heading hierarchy" },
+      "snug":    { "value": 1.25, "note": "Subheadings" },
+      "normal":  { "value": 1.5,  "note": "Body text default" },
+      "relaxed": { "value": 1.65, "note": "Intro/lead paragraphs" },
+      "loose":   { "value": 2,    "note": "Labels with extra spacing" }
+    },
+    "letterSpacing": {
+      "tightest": { "value": "-0.04em", "note": "Large display text" },
+      "tighter":  { "value": "-0.02em", "note": "Headings" },
+      "tight":    { "value": "-0.01em" },
+      "normal":   { "value": "0" },
+      "wide":     { "value": "0.04em",  "note": "Navigation caps, labels" },
+      "wider":    { "value": "0.08em",  "note": "Eyebrow text, caps labels" },
+      "widest":   { "value": "0.16em",  "note": "Max tracking — section labels" }
+    },
+    "textTransform": {
+      "uppercase":   "uppercase",
+      "lowercase":   "lowercase",
+      "capitalize":  "capitalize",
+      "normal":      "none",
+      "note": "Maggie uses mixed case intentionally — some words UPPERCASE in otherwise sentence-case headlines for editorial effect"
+    },
+    "heading": {
+      "display": {
+        "fontFamily": "var(--font-display)",
+        "fontSize": "clamp(4.5rem, 10vw, 11rem)",
+        "fontWeight": 900,
+        "lineHeight": 1,
+        "letterSpacing": "-0.03em",
+        "textTransform": "uppercase",
+        "note": "Full-bleed section titles like 'FIND', 'FREE', 'ACTIVITIES'"
+      },
+      "h1": {
+        "fontFamily": "var(--font-display)",
+        "fontSize": "clamp(2.5rem, 5vw, 5rem)",
+        "fontWeight": 900,
+        "lineHeight": 1.05,
+        "letterSpacing": "-0.025em",
+        "note": "Hero main heading"
+      },
+      "h2": {
+        "fontFamily": "var(--font-display)",
+        "fontSize": "clamp(2rem, 4vw, 4rem)",
+        "fontWeight": 900,
+        "lineHeight": 1.1,
+        "letterSpacing": "-0.02em"
+      },
+      "h3": {
+        "fontFamily": "var(--font-display)",
+        "fontSize": "clamp(1.5rem, 3vw, 2.5rem)",
+        "fontWeight": 900,
+        "lineHeight": 1.15,
+        "letterSpacing": "-0.015em"
+      },
+      "h4": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "1.25rem",
+        "fontWeight": 700,
+        "lineHeight": 1.3,
+        "letterSpacing": "0.04em",
+        "textTransform": "uppercase",
+        "note": "Section labels / eyebrow text — e.g. 'FIND ACTIVITIES in your Local area'"
+      },
+      "h5": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "1rem",
+        "fontWeight": 600,
+        "lineHeight": 1.4,
+        "letterSpacing": "0.06em",
+        "textTransform": "uppercase"
+      },
+      "h6": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "0.875rem",
+        "fontWeight": 600,
+        "lineHeight": 1.5,
+        "letterSpacing": "0.08em",
+        "textTransform": "uppercase"
+      }
+    },
+    "body": {
+      "large": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "1.25rem",
+        "fontWeight": 400,
+        "lineHeight": 1.65,
+        "note": "Subtitle / intro paragraph — e.g. 'Your pocket guide to surviving parenthood'"
+      },
+      "base": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "1rem",
+        "fontWeight": 400,
+        "lineHeight": 1.5
+      },
+      "small": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "0.875rem",
+        "fontWeight": 400,
+        "lineHeight": 1.5
+      },
+      "caption": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "0.75rem",
+        "fontWeight": 500,
+        "lineHeight": 1.4,
+        "letterSpacing": "0.04em",
+        "textTransform": "uppercase"
+      }
+    }
+  },
+
+  "spacing": {
+    "base": { "value": "8px", "note": "Base unit — all spacing is multiples of 8px" },
+    "scale": {
+      "0":    "0px",
+      "px":   "1px",
+      "0.5":  "4px",
+      "1":    "8px",
+      "1.5":  "12px",
+      "2":    "16px",
+      "3":    "24px",
+      "4":    "32px",
+      "5":    "40px",
+      "6":    "48px",
+      "7":    "56px",
+      "8":    "64px",
+      "10":   "80px",
+      "12":   "96px",
+      "14":   "112px",
+      "16":   "128px",
+      "20":   "160px",
+      "24":   "192px",
+      "28":   "224px",
+      "32":   "256px"
+    },
+    "sectionPadding": {
+      "xs":  "48px",
+      "sm":  "64px",
+      "md":  "96px",
+      "lg":  "128px",
+      "xl":  "160px",
+      "note": "Vertical padding for page sections. Maggie uses generous whitespace with ~96-160px vertical padding on major sections"
+    },
+    "containerPadding": {
+      "mobile":  "20px",
+      "tablet":  "32px",
+      "desktop": "48px"
+    }
+  },
+
+  "sizing": {
+    "containerMaxWidth": {
+      "sm":       "640px",
+      "md":       "768px",
+      "lg":       "1024px",
+      "xl":       "1280px",
+      "content":  "1200px",
+      "full":     "100%",
+      "note": "Maggie uses mostly full-bleed layouts with occasional constrained content columns (~1200px)"
+    },
+    "navHeight": {
+      "mobile":  "64px",
+      "desktop": "80px"
+    },
+    "buttonHeight": {
+      "sm": "36px",
+      "md": "48px",
+      "lg": "56px"
+    },
+    "iconSize": {
+      "sm":  "16px",
+      "md":  "24px",
+      "lg":  "32px",
+      "xl":  "40px",
+      "2xl": "48px"
+    },
+    "appStoreButtonWidth": "160px",
+    "appStoreButtonHeight": "48px"
+  },
+
+  "breakpoints": {
+    "sm":  { "value": "640px",  "note": "Small mobile breakpoint" },
+    "md":  { "value": "768px",  "note": "Tablet portrait" },
+    "lg":  { "value": "1024px", "note": "Tablet landscape / small desktop" },
+    "xl":  { "value": "1280px", "note": "Desktop" },
+    "2xl": { "value": "1440px", "note": "Large desktop — Maggie's design baseline" },
+    "3xl": { "value": "1920px", "note": "Wide screen" }
+  },
+
+  "borderRadius": {
+    "none":    "0px",
+    "sm":      "4px",
+    "md":      "8px",
+    "lg":      "12px",
+    "xl":      "16px",
+    "2xl":     "24px",
+    "3xl":     "32px",
+    "full":    "9999px",
+    "phone":   "32px",
+    "note": "Maggie uses moderate rounding. App phone screenshots shown with ~32px rounding. Buttons use full rounding (pill shape) or no rounding (flat rect with border). Cards use xl (16px) or 2xl (24px)."
+  },
+
+  "shadow": {
+    "none":   "none",
+    "sm":     "0 1px 3px 0 rgba(26, 24, 20, 0.08), 0 1px 2px -1px rgba(26, 24, 20, 0.08)",
+    "md":     "0 4px 6px -1px rgba(26, 24, 20, 0.10), 0 2px 4px -2px rgba(26, 24, 20, 0.10)",
+    "lg":     "0 10px 15px -3px rgba(26, 24, 20, 0.10), 0 4px 6px -4px rgba(26, 24, 20, 0.05)",
+    "xl":     "0 20px 25px -5px rgba(26, 24, 20, 0.10), 0 8px 10px -6px rgba(26, 24, 20, 0.05)",
+    "2xl":    "0 25px 50px -12px rgba(26, 24, 20, 0.25)",
+    "phone":  "0 32px 80px -16px rgba(26, 24, 20, 0.35), 0 8px 32px -8px rgba(26, 24, 20, 0.20)",
+    "card":   "0 8px 32px rgba(26, 24, 20, 0.08)",
+    "inner":  "inset 0 2px 4px 0 rgba(26, 24, 20, 0.06)",
+    "note": "Shadows use warm near-black (#1A1814) rather than pure black for cohesion with brand palette"
+  },
+
+  "border": {
+    "width": {
+      "none":   "0px",
+      "thin":   "1px",
+      "base":   "1.5px",
+      "medium": "2px",
+      "thick":  "3px",
+      "heavy":  "4px"
+    },
+    "style": {
+      "solid":  "solid",
+      "dashed": "dashed",
+      "dotted": "dotted"
+    }
+  },
+
+  "motion": {
+    "duration": {
+      "instant": "0ms",
+      "fast":    "100ms",
+      "normal":  "200ms",
+      "slow":    "350ms",
+      "slower":  "500ms",
+      "slowest": "800ms",
+      "marquee": "30s"
+    },
+    "easing": {
+      "linear":     "linear",
+      "ease":       "ease",
+      "easeIn":     "cubic-bezier(0.4, 0, 1, 1)",
+      "easeOut":    "cubic-bezier(0, 0, 0.2, 1)",
+      "easeInOut":  "cubic-bezier(0.4, 0, 0.2, 1)",
+      "spring":     "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "bounce":     "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+    },
+    "animation": {
+      "marquee": {
+        "description": "Horizontal scrolling ticker/marquee — used for brand logos/icons strip",
+        "keyframes": "@keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }",
+        "duration": "30s",
+        "timing": "linear",
+        "iteration": "infinite"
+      },
+      "fadeUp": {
+        "description": "Section entrance animation",
+        "keyframes": "@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }",
+        "duration": "500ms",
+        "timing": "cubic-bezier(0, 0, 0.2, 1)"
+      },
+      "phoneFloat": {
+        "description": "Subtle float on phone mockups",
+        "keyframes": "@keyframes phoneFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }",
+        "duration": "6s",
+        "timing": "ease-in-out",
+        "iteration": "infinite"
+      },
+      "countUp": {
+        "description": "Number counter animation for stats",
+        "type": "JavaScript",
+        "duration": "2000ms",
+        "easing": "easeOut"
+      }
+    }
+  },
+
+  "component": {
+    "button": {
+      "primary": {
+        "description": "App Store download CTA — main conversion action",
+        "backgroundColor": "#1A1814",
+        "color": "#FFFEF9",
+        "border": "2px solid #1A1814",
+        "borderRadius": "9999px",
+        "paddingX": "24px",
+        "paddingY": "12px",
+        "fontSize": "0.875rem",
+        "fontFamily": "var(--font-body)",
+        "fontWeight": 600,
+        "letterSpacing": "0.04em",
+        "textTransform": "uppercase",
+        "transition": "all 200ms cubic-bezier(0, 0, 0.2, 1)",
+        "hover": {
+          "backgroundColor": "#504A48",
+          "transform": "translateY(-2px)",
+          "boxShadow": "0 8px 24px rgba(26, 24, 20, 0.2)"
+        }
+      },
+      "secondary": {
+        "description": "Outline / ghost variant",
+        "backgroundColor": "transparent",
+        "color": "#1A1814",
+        "border": "2px solid #1A1814",
+        "borderRadius": "9999px",
+        "paddingX": "24px",
+        "paddingY": "12px",
+        "fontSize": "0.875rem",
+        "fontWeight": 600,
+        "letterSpacing": "0.04em",
+        "textTransform": "uppercase",
+        "hover": {
+          "backgroundColor": "#1A1814",
+          "color": "#FFFEF9"
+        }
+      },
+      "link": {
+        "description": "Navigation and inline links — small caps style",
+        "backgroundColor": "transparent",
+        "color": "#1A1814",
+        "border": "none",
+        "fontSize": "0.875rem",
+        "fontWeight": 700,
+        "letterSpacing": "0.08em",
+        "textTransform": "uppercase",
+        "textDecoration": "none",
+        "hover": {
+          "color": "#2EA858",
+          "textDecoration": "underline"
+        }
+      },
+      "appStore": {
+        "description": "App Store download button — actual iOS App Store badge",
+        "backgroundColor": "#1A1814",
+        "color": "#FFFEF9",
+        "borderRadius": "12px",
+        "width": "160px",
+        "height": "52px",
+        "display": "flex",
+        "alignItems": "center",
+        "gap": "8px",
+        "note": "Shows Apple logo + 'Download on the / App Store' lockup"
+      }
+    },
+    "badge": {
+      "green": {
+        "backgroundColor": "#D1EDDB",
+        "color": "#1A6C34",
+        "borderRadius": "9999px",
+        "paddingX": "12px",
+        "paddingY": "4px",
+        "fontSize": "0.75rem",
+        "fontWeight": 600,
+        "letterSpacing": "0.06em",
+        "textTransform": "uppercase"
+      },
+      "yellow": {
+        "backgroundColor": "#FEF6C2",
+        "color": "#906D00"
+      },
+      "pink": {
+        "backgroundColor": "#FFD7E3",
+        "color": "#951441"
+      },
+      "neutral": {
+        "backgroundColor": "#EDE8DB",
+        "color": "#504A48"
+      }
+    },
+    "card": {
+      "default": {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": "24px",
+        "padding": "32px",
+        "boxShadow": "0 8px 32px rgba(26, 24, 20, 0.08)",
+        "border": "1px solid #EDE8DB"
+      },
+      "featureCard": {
+        "description": "Feature section card with image + label",
+        "backgroundColor": "#FAF8F2",
+        "borderRadius": "24px",
+        "overflow": "hidden",
+        "aspectRatio": "1 / 1",
+        "padding": "0"
+      }
+    },
+    "nav": {
+      "height": "80px",
+      "backgroundColor": "#FAF8F2",
+      "backdropFilter": "blur(12px)",
+      "position": "sticky",
+      "top": "0",
+      "zIndex": 100,
+      "padding": "0 48px",
+      "borderBottom": "none",
+      "logoSize": "auto 40px",
+      "linkStyle": {
+        "fontSize": "0.875rem",
+        "fontWeight": 700,
+        "letterSpacing": "0.08em",
+        "textTransform": "uppercase",
+        "color": "#1A1814"
+      }
+    },
+    "heroSection": {
+      "layout": "centered",
+      "paddingTop": "120px",
+      "paddingBottom": "80px",
+      "eyebrow": {
+        "text": "meet maggie",
+        "fontFamily": "var(--font-display)",
+        "fontSize": "1rem",
+        "fontStyle": "italic",
+        "fontWeight": 400,
+        "color": "#6C6460",
+        "letterSpacing": "0.04em"
+      },
+      "headline": {
+        "fontFamily": "var(--font-display)",
+        "fontSize": "clamp(2.5rem, 5vw, 5rem)",
+        "fontWeight": 900,
+        "maxWidth": "800px",
+        "lineHeight": 1.05
+      },
+      "appStoreButton": "bottom of hero, left-aligned",
+      "appScreenshots": {
+        "count": 3,
+        "layout": "horizontal stack, slight overlap",
+        "borderRadius": "32px",
+        "shadow": "0 32px 80px -16px rgba(26, 24, 20, 0.35)"
+      }
+    },
+    "marquee": {
+      "description": "Horizontal scrolling strip of brand partner icons/illustrations",
+      "backgroundColor": "#FAF8F2",
+      "borderTop": "1.5px solid #1A1814",
+      "borderBottom": "1.5px solid #1A1814",
+      "height": "120px",
+      "itemGap": "48px",
+      "animationDuration": "30s",
+      "pauseOnHover": true
+    },
+    "editorialScroller": {
+      "description": "Full-bleed section where large words scroll with interspersed photography — headline like 'FIND FREE SANITY-SAVING...'",
+      "backgroundColor": "#FAF8F2",
+      "textColor": "#1A1814",
+      "fontSize": "clamp(5rem, 12vw, 11rem)",
+      "fontFamily": "var(--font-display)",
+      "fontWeight": 900,
+      "lineHeight": 1,
+      "textTransform": "uppercase",
+      "imageTreatment": {
+        "borderRadius": "24px",
+        "objectFit": "cover",
+        "display": "inline-block",
+        "verticalAlign": "middle",
+        "width": "auto",
+        "height": "0.85em"
+      }
+    },
+    "footer": {
+      "backgroundColor": "#FAF8F2",
+      "borderTop": "1.5px solid #EDE8DB",
+      "paddingY": "48px",
+      "layout": "3-column: social | copyright | CTA",
+      "textStyle": {
+        "fontSize": "0.875rem",
+        "fontWeight": 600,
+        "letterSpacing": "0.08em",
+        "textTransform": "uppercase",
+        "color": "#1A1814"
+      }
+    },
+    "statCounter": {
+      "description": "Animated count-up number stat — 'More than 0 Free activities'",
+      "numberStyle": {
+        "fontFamily": "var(--font-display)",
+        "fontSize": "clamp(4rem, 8vw, 8rem)",
+        "fontWeight": 900,
+        "lineHeight": 1
+      },
+      "labelStyle": {
+        "fontFamily": "var(--font-body)",
+        "fontSize": "1.25rem",
+        "fontWeight": 400
+      }
+    }
+  },
+
+  "pattern": {
+    "pageStructure": [
+      "Nav (sticky, transparent-to-filled on scroll)",
+      "Hero — eyebrow + headline + App Store CTA + phone screenshots",
+      "Marquee — scrolling icons strip (border top/bottom)",
+      "Editorial scroller — oversized words interspersed with photos",
+      "Feature grid — 'WITH MAGGIE YOU CAN:' with 3-col image/feature cards",
+      "Mission section — dark or cream band with headline + to-do list items",
+      "Founders story — photo + headline split",
+      "Partners/press logos — scrolling strip",
+      "Mission statement — large centered text",
+      "Stat counter — animated number",
+      "CTA — 'turn chaos into chuckles with Maggie!' + App Store button",
+      "Footer — TikTok, copyright, policies, App Store"
+    ],
+    "sectionSpacing": {
+      "betweenSections": "0px",
+      "sectionPaddingVertical": "96px to 160px",
+      "note": "Sections flow directly together with no gap — spacing is handled within sections via padding"
+    },
+    "contentWidth": {
+      "default": "100%",
+      "text": "max-width: 800px; margin: 0 auto",
+      "wide": "max-width: 1200px; margin: 0 auto"
+    }
+  },
+
+  "cssVariables": {
+    "comment": "Paste this into :root {} in your CSS",
+    "variables": {
+      "--color-bg": "#FAF8F2",
+      "--color-bg-secondary": "#F4F1E8",
+      "--color-bg-inverse": "#1A1814",
+      "--color-text": "#1A1814",
+      "--color-text-secondary": "#6C6460",
+      "--color-text-inverse": "#FFFEF9",
+      "--color-green": "#2EA858",
+      "--color-green-light": "#D1EDDB",
+      "--color-yellow": "#F5D720",
+      "--color-yellow-light": "#FEF6C2",
+      "--color-pink": "#F5618F",
+      "--color-pink-light": "#FFD7E3",
+      "--color-border": "#D8D2C4",
+      "--color-border-subtle": "#EDE8DB",
+      "--font-display": "'BN Dime Heavy', 'Times New Roman', Georgia, serif",
+      "--font-body": "'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "--font-mono": "'JetBrains Mono', 'Courier New', monospace",
+      "--radius-sm": "4px",
+      "--radius-md": "8px",
+      "--radius-lg": "16px",
+      "--radius-xl": "24px",
+      "--radius-2xl": "32px",
+      "--radius-full": "9999px",
+      "--shadow-card": "0 8px 32px rgba(26, 24, 20, 0.08)",
+      "--shadow-phone": "0 32px 80px -16px rgba(26, 24, 20, 0.35)",
+      "--nav-height": "80px",
+      "--container-width": "1200px",
+      "--section-padding": "96px",
+      "--transition-fast": "100ms cubic-bezier(0, 0, 0.2, 1)",
+      "--transition-base": "200ms cubic-bezier(0, 0, 0.2, 1)",
+      "--transition-slow": "350ms cubic-bezier(0, 0, 0.2, 1)"
+    }
+  },
+
+  "tailwindConfig": {
+    "comment": "Add this to your tailwind.config.js theme.extend block",
+    "colors": {
+      "brand": {
+        "green": "#2EA858",
+        "yellow": "#F5D720",
+        "pink": "#F5618F"
+      },
+      "cream": {
+        "50": "#FFFEF9",
+        "100": "#FAF8F2",
+        "200": "#F4F1E8",
+        "300": "#EDE8DB",
+        "400": "#D8D2C4"
+      },
+      "ink": {
+        "900": "#1A1814",
+        "600": "#6C6460",
+        "400": "#908880"
+      }
+    },
+    "fontFamily": {
+      "display": ["BN Dime Heavy", "Times New Roman", "Georgia", "serif"],
+      "body": ["DM Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
+    },
+    "borderRadius": {
+      "phone": "32px"
+    }
+  }
+}

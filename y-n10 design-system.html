@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yamauchi No.10 — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500&family=Noto+Sans+JP:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ========================================================
+   DESIGN SYSTEM TOKENS — Yamauchi No.10 Family Office
+   Reverse engineered from y-n10.com by mount inc.
+   ======================================================== */
+
+:root {
+  /* COLOR */
+  --color-bg:          #000000;
+  --color-fg:          #ffffff;
+  --color-gray-50:     #f9f9f9;
+  --color-gray-100:    #f0f0f0;
+  --color-gray-200:    #e0e0e0;
+  --color-gray-300:    #c4c4c4;
+  --color-gray-400:    #9b9b9b;
+  --color-gray-500:    #767676;
+  --color-gray-600:    #555555;
+  --color-gray-700:    #333333;
+  --color-gray-800:    #1a1a1a;
+  --color-gray-900:    #0d0d0d;
+  --color-border:      rgba(255,255,255,0.12);
+  --color-border-sub:  rgba(255,255,255,0.06);
+  --color-border-strong: rgba(255,255,255,0.30);
+
+  /* TYPOGRAPHY */
+  --font-display:      'Cormorant Garamond', 'Times New Roman', serif;
+  --font-display-alt:  'Helvetica Neue', 'Arial', sans-serif;
+  --font-japanese:     'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --font-jp-ui:        'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --font-mono:         'JetBrains Mono', 'Courier New', monospace;
+  --font-body:         var(--font-japanese);
+
+  --size-2xs:   0.625rem;   /* 10px */
+  --size-xs:    0.75rem;    /* 12px */
+  --size-sm:    0.875rem;   /* 14px */
+  --size-base:  1rem;       /* 16px */
+  --size-md:    1.125rem;   /* 18px */
+  --size-lg:    1.25rem;    /* 20px */
+  --size-xl:    1.5rem;     /* 24px */
+  --size-2xl:   1.875rem;   /* 30px */
+  --size-3xl:   2.25rem;    /* 36px */
+  --size-4xl:   3rem;       /* 48px */
+  --size-5xl:   3.75rem;    /* 60px */
+  --size-6xl:   4.5rem;     /* 72px */
+  --size-7xl:   6rem;       /* 96px */
+  --size-8xl:   8rem;       /* 128px */
+  --size-display: clamp(3.75rem, 8vw, 10rem);
+  --size-section: clamp(2.25rem, 5vw, 4.5rem);
+
+  --weight-thin:      100;
+  --weight-extralight:200;
+  --weight-light:     300;
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-black:     900;
+
+  --leading-none:     1;
+  --leading-tight:    1.1;
+  --leading-snug:     1.3;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.7;
+  --leading-loose:    2.0;
+  --leading-japanese: 1.9;
+
+  --tracking-tighter:  -0.05em;
+  --tracking-tight:    -0.025em;
+  --tracking-normal:    0em;
+  --tracking-wide:      0.05em;
+  --tracking-wider:     0.1em;
+  --tracking-widest:    0.2em;
+  --tracking-expanded:  0.3em;
+
+  /* SPACING */
+  --sp-1:   4px;   --sp-2:   8px;   --sp-3:   12px;  --sp-4:   16px;
+  --sp-5:   20px;  --sp-6:   24px;  --sp-8:   32px;  --sp-10:  40px;
+  --sp-12:  48px;  --sp-16:  64px;  --sp-20:  80px;  --sp-24:  96px;
+  --sp-32:  128px; --sp-40:  160px; --sp-48:  192px; --sp-64:  256px;
+  --section-px: clamp(24px, 5vw, 80px);
+  --section-py: clamp(80px, 10vh, 160px);
+
+  /* BORDERS */
+  --radius-none: 0px;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-full: 9999px;
+  --border-width-thin:   1px;
+  --border-width-medium: 2px;
+  --border-default: 1px solid var(--color-border);
+  --border-section: 1px solid rgba(255,255,255,0.08);
+
+  /* MOTION */
+  --dur-fast:      150ms;
+  --dur-normal:    300ms;
+  --dur-slow:      600ms;
+  --dur-slower:    900ms;
+  --dur-cinematic: 1200ms;
+  --dur-epic:      2000ms;
+
+  --ease-film:      cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-dramatic:  cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-decelerate:cubic-bezier(0, 0, 0.35, 1);
+  --ease-in-out:    cubic-bezier(0.4, 0, 0.2, 1);
+
+  --transition-default: var(--dur-normal) var(--ease-film);
+  --transition-cinematic: var(--dur-cinematic) var(--ease-dramatic);
+
+  /* Z-INDEX */
+  --z-webgl: 0;  --z-base: 1;  --z-raised: 10;
+  --z-nav: 50;   --z-overlay: 100; --z-splash: 500;
+}
+
+/* ========================================================
+   DESIGN SYSTEM SHELL
+   ======================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: #0a0a0a;
+  color: var(--color-fg);
+  font-family: var(--font-display-alt);
+  line-height: var(--leading-normal);
+  min-height: 100vh;
+}
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 220px; height: 100vh;
+  background: #080808;
+  border-right: var(--border-default);
+  overflow-y: auto; overflow-x: hidden;
+  z-index: var(--z-nav);
+  display: flex; flex-direction: column;
+}
+
+.sidebar-logo {
+  padding: var(--sp-8) var(--sp-6) var(--sp-6);
+  border-bottom: var(--border-default);
+}
+
+.sidebar-logo h1 {
+  font-family: var(--font-display);
+  font-size: var(--size-base);
+  font-weight: var(--weight-light);
+  line-height: 1.3;
+  color: var(--color-fg);
+}
+
+.sidebar-logo p {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-500);
+  margin-top: var(--sp-2);
+  text-transform: uppercase;
+}
+
+.sidebar nav { flex: 1; padding: var(--sp-4) 0; }
+
+.sidebar nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-6);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-gray-500);
+  text-decoration: none;
+  transition: color var(--transition-default);
+  white-space: nowrap;
+}
+
+.sidebar nav a:hover { color: var(--color-fg); }
+.sidebar nav a.active { color: var(--color-fg); }
+
+.nav-group-label {
+  display: block;
+  padding: var(--sp-6) var(--sp-6) var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-700);
+  text-transform: uppercase;
+  border-top: var(--border-section);
+}
+
+/* ---- MAIN ---- */
+.main {
+  margin-left: 220px;
+  min-height: 100vh;
+}
+
+/* ---- SECTION ---- */
+.ds-section {
+  padding: var(--sp-20) clamp(32px, 5vw, 80px) var(--sp-20);
+  border-bottom: var(--border-section);
+  max-width: 1200px;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--size-4xl);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--sp-4);
+}
+
+.section-desc {
+  font-family: var(--font-display-alt);
+  font-size: var(--size-sm);
+  color: var(--color-gray-400);
+  line-height: var(--leading-relaxed);
+  max-width: 600px;
+  margin-bottom: var(--sp-12);
+}
+
+/* ---- TOKEN GRID ---- */
+.token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-10);
+}
+
+.token-grid-wide {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.token-card {
+  background: #111;
+  border: var(--border-default);
+  border-radius: var(--radius-none);
+  overflow: hidden;
+}
+
+.token-swatch {
+  height: 80px;
+  display: flex; align-items: flex-end;
+  padding: var(--sp-2) var(--sp-3);
+}
+
+.swatch-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-wider);
+  opacity: 0.7;
+}
+
+.token-info {
+  padding: var(--sp-3) var(--sp-3);
+  border-top: var(--border-default);
+}
+
+.token-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--color-gray-300);
+  margin-bottom: 3px;
+}
+
+.token-value {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--color-gray-600);
+}
+
+.token-desc {
+  font-family: var(--font-display-alt);
+  font-size: 10px;
+  color: var(--color-gray-600);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ---- HERO (Site Reference) ---- */
+.hero-ref {
+  position: relative;
+  background: #000;
+  height: 100vh; min-height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  border-bottom: var(--border-section);
+  overflow: hidden;
+}
+
+.hero-noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.04; pointer-events: none;
+}
+
+.hero-logo {
+  font-family: var(--font-display);
+  font-size: var(--size-display);
+  font-weight: var(--weight-light);
+  color: #fff;
+  letter-spacing: var(--tracking-tight);
+  text-align: center;
+  line-height: var(--leading-tight);
+  margin-bottom: var(--sp-8);
+}
+
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-400);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-12);
+}
+
+.btn-enter {
+  width: 80px; height: 80px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-expanded);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color var(--transition-default), transform var(--dur-slow) var(--ease-film);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.btn-enter:hover {
+  border-color: rgba(255,255,255,0.9);
+  transform: scale(1.05);
+}
+
+.hero-sound-notice {
+  position: absolute; bottom: var(--sp-10);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-600);
+  text-align: center;
+}
+
+.hero-nav-preview {
+  position: absolute; top: var(--sp-8); left: 0; right: 0;
+  display: flex; justify-content: space-between;
+  padding: 0 var(--sp-12);
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-500);
+}
+
+/* ---- TYPOGRAPHY SPECIMENS ---- */
+.type-specimen {
+  margin-bottom: var(--sp-8);
+  padding-bottom: var(--sp-8);
+  border-bottom: var(--border-section);
+}
+
+.type-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-600);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+  display: flex; gap: var(--sp-8);
+}
+
+.type-label span { white-space: nowrap; }
+
+.type-specimen-text { line-height: 1.1; }
+
+/* ---- SPACING SCALE ---- */
+.spacing-row {
+  display: flex; align-items: center; gap: var(--sp-6);
+  margin-bottom: var(--sp-3);
+}
+.spacing-bar {
+  background: rgba(255,255,255,0.15);
+  height: 2px;
+  flex-shrink: 0;
+}
+.spacing-info {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-gray-500);
+  white-space: nowrap;
+  min-width: 140px;
+}
+
+/* ---- COMPONENT DEMOS ---- */
+.demo-block {
+  background: #000;
+  border: var(--border-default);
+  padding: var(--sp-12);
+  margin-bottom: var(--sp-6);
+}
+
+.demo-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-600);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-6);
+  padding-bottom: var(--sp-4);
+  border-bottom: var(--border-section);
+}
+
+/* Nav Component */
+.nav-demo {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: var(--sp-4) var(--sp-8);
+  background: #000;
+  border: var(--border-default);
+}
+.nav-logo-demo {
+  font-family: var(--font-display-alt);
+  font-size: var(--size-xs);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-fg);
+}
+.nav-items-demo {
+  display: flex; gap: var(--sp-8);
+  list-style: none;
+}
+.nav-items-demo li a {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-400);
+  text-decoration: none; text-transform: uppercase;
+  transition: color var(--transition-default);
+}
+.nav-items-demo li a:hover { color: var(--color-fg); }
+
+.nav-controls {
+  display: flex; gap: var(--sp-6); align-items: center;
+}
+.nav-controls span {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-500); text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* Section Component */
+.section-demo {
+  background: #000;
+  padding: clamp(60px, 8vh, 120px) clamp(32px, 5vw, 80px);
+  border: var(--border-default);
+  margin-bottom: var(--sp-4);
+}
+
+.sec-index {
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-500);
+  margin-bottom: var(--sp-8);
+}
+
+.sec-title-jp {
+  font-family: var(--font-japanese);
+  font-size: var(--size-section);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-fg);
+  margin-bottom: var(--sp-4);
+}
+
+.sec-title-en {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.5vw, 5rem);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-fg);
+  margin-bottom: var(--sp-8);
+}
+
+.sec-body-jp {
+  font-family: var(--font-japanese);
+  font-size: var(--size-base);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-japanese);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gray-300);
+  max-width: 580px; margin-bottom: var(--sp-8);
+}
+
+.sec-body-en {
+  font-family: var(--font-display-alt);
+  font-size: var(--size-sm);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-relaxed);
+  color: var(--color-gray-400);
+  max-width: 580px;
+}
+
+/* Philosophy Card */
+.philosophy-list { list-style: none; }
+
+.philosophy-item {
+  padding: var(--sp-10) 0;
+  border-top: var(--border-section);
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--sp-8);
+  align-items: start;
+}
+
+.phil-number {
+  font-family: var(--font-display);
+  font-size: var(--size-6xl);
+  font-weight: var(--weight-thin);
+  color: rgba(255,255,255,0.12);
+  line-height: 1;
+}
+
+.phil-body-jp {
+  font-family: var(--font-japanese);
+  font-size: var(--size-sm);
+  line-height: var(--leading-japanese);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gray-300);
+  margin-bottom: var(--sp-3);
+}
+
+.phil-body-en {
+  font-family: var(--font-display-alt);
+  font-size: var(--size-xs);
+  line-height: var(--leading-relaxed);
+  color: var(--color-gray-500);
+}
+
+/* Person Card */
+.person-list { list-style: none; }
+
+.person-item {
+  padding: var(--sp-10) 0;
+  border-top: var(--border-section);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--sp-10);
+  transition: opacity var(--transition-default);
+}
+.person-item:hover { opacity: 0.75; }
+
+.person-meta {}
+
+.person-category {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-600);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+
+.person-role {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-500);
+  line-height: var(--leading-normal);
+}
+
+.person-info {}
+
+.person-name-jp {
+  font-family: var(--font-japanese);
+  font-size: var(--size-xl);
+  font-weight: var(--weight-light);
+  color: var(--color-fg);
+  margin-bottom: var(--sp-1);
+}
+
+.person-name-en {
+  font-family: var(--font-display);
+  font-size: var(--size-2xl);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-fg);
+  margin-bottom: var(--sp-4);
+}
+
+.person-bio {
+  font-family: var(--font-display-alt);
+  font-size: var(--size-xs);
+  line-height: var(--leading-relaxed);
+  color: var(--color-gray-500);
+}
+
+/* Activity Item */
+.activity-item {
+  padding: var(--sp-10) 0;
+  border-top: var(--border-section);
+}
+
+.act-index {
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-600);
+  margin-bottom: var(--sp-4);
+}
+
+.act-title-jp {
+  font-family: var(--font-japanese);
+  font-size: var(--size-3xl);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-fg);
+  margin-bottom: var(--sp-3);
+}
+
+.act-title-en {
+  font-family: var(--font-display);
+  font-size: var(--size-2xl);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-fg);
+  margin-bottom: var(--sp-6);
+}
+
+/* Footer */
+.footer-demo {
+  background: #000;
+  padding: var(--sp-16) clamp(32px, 5vw, 80px);
+  border: var(--border-default);
+}
+
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding-bottom: var(--sp-12);
+  border-bottom: var(--border-section);
+  margin-bottom: var(--sp-8);
+}
+
+.footer-wordmark {
+  font-family: var(--font-display-alt);
+  font-size: var(--size-base);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-fg);
+}
+
+.footer-nav {
+  display: flex; gap: var(--sp-8); list-style: none;
+}
+
+.footer-nav a {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-500);
+  text-decoration: none; text-transform: uppercase;
+  transition: color var(--transition-default);
+}
+.footer-nav a:hover { color: var(--color-fg); }
+
+.footer-social {
+  display: flex; gap: var(--sp-6);
+}
+
+.footer-social a {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-600);
+  text-decoration: none; text-transform: uppercase;
+  transition: color var(--transition-default);
+  position: relative;
+}
+.footer-social a::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-fg);
+  transition: width var(--transition-default);
+}
+.footer-social a:hover { color: var(--color-fg); }
+.footer-social a:hover::after { width: 100%; }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.footer-controls {
+  display: flex; gap: var(--sp-6);
+}
+.footer-controls button {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-500);
+  text-transform: uppercase; background: none; border: none; cursor: pointer;
+  transition: color var(--transition-default); padding: 0;
+}
+.footer-controls button:hover { color: var(--color-fg); }
+
+/* Contact Section */
+.contact-demo {
+  background: #000;
+  padding: var(--sp-24) clamp(32px, 5vw, 80px);
+  border: var(--border-default);
+  text-align: center;
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-600); text-transform: uppercase;
+  margin-bottom: var(--sp-6);
+}
+
+.contact-email {
+  font-family: var(--font-display);
+  font-size: var(--size-3xl);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-fg);
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+.contact-email::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-fg);
+  transition: width var(--dur-slow) var(--ease-film);
+}
+.contact-email:hover::after { width: 100%; }
+
+/* Motion Demos */
+.motion-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+}
+
+.motion-item {
+  background: #000;
+  border: var(--border-default);
+  padding: var(--sp-10);
+  text-align: center;
+}
+
+.motion-box {
+  width: 48px; height: 48px;
+  border: 1px solid rgba(255,255,255,0.3);
+  margin: 0 auto var(--sp-6);
+  transition: all var(--dur-slow) var(--ease-film);
+}
+
+.motion-item:hover .motion-box-film {
+  transform: translateY(-8px);
+  border-color: rgba(255,255,255,0.8);
+}
+
+.motion-item:hover .motion-box-dramatic {
+  transform: scale(1.15);
+  border-color: rgba(255,255,255,0.9);
+}
+
+.motion-item:hover .motion-box-fast {
+  opacity: 0.3;
+  transition-duration: var(--dur-fast);
+}
+
+.motion-item:hover .motion-box-cinematic {
+  transform: rotate(45deg);
+  transition-duration: var(--dur-cinematic);
+  transition-timing-function: var(--ease-dramatic);
+}
+
+.motion-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: var(--tracking-wider);
+  color: var(--color-gray-500); text-transform: uppercase;
+}
+
+.motion-value {
+  font-family: var(--font-mono);
+  font-size: 9px; color: var(--color-gray-700);
+  margin-top: var(--sp-1);
+}
+
+/* Border & Radius demos */
+.border-row {
+  display: flex; gap: var(--sp-6); margin-bottom: var(--sp-6);
+  flex-wrap: wrap;
+}
+
+.border-swatch {
+  padding: var(--sp-6) var(--sp-8);
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--color-gray-400); letter-spacing: var(--tracking-wider);
+  flex-shrink: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ---- INTRO SECTION ---- */
+.ds-intro {
+  background: #000;
+  padding: var(--sp-24) clamp(32px, 5vw, 80px);
+  border-bottom: var(--border-section);
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.ds-intro-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-600); text-transform: uppercase;
+  margin-bottom: var(--sp-8);
+}
+
+.ds-intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 7rem);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-fg);
+  margin-bottom: var(--sp-8);
+  max-width: 900px;
+}
+
+.ds-intro-sub {
+  font-family: var(--font-display-alt);
+  font-size: var(--size-sm);
+  color: var(--color-gray-400);
+  line-height: var(--leading-relaxed);
+  max-width: 500px;
+  margin-bottom: var(--sp-12);
+}
+
+.ds-intro-meta {
+  display: flex; gap: var(--sp-10); flex-wrap: wrap;
+}
+
+.ds-meta-item {}
+
+.ds-meta-label {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: var(--tracking-expanded);
+  color: var(--color-gray-600); text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+}
+
+.ds-meta-value {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--color-gray-300);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Color context indicators */
+.on-dark  { background: #000; color: #fff; padding: var(--sp-1) var(--sp-2); }
+.on-light { background: #fff; color: #000; padding: var(--sp-1) var(--sp-2); font-family: var(--font-mono); font-size: 9px; }
+
+/* CSS snippet blocks */
+.code-block {
+  background: #080808;
+  border: var(--border-default);
+  padding: var(--sp-6) var(--sp-8);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-gray-300);
+  line-height: 1.8;
+  overflow-x: auto;
+  margin-top: var(--sp-4);
+  border-left: 2px solid rgba(255,255,255,0.2);
+}
+
+.code-block .token-prop { color: #9b9b9b; }
+.code-block .token-val  { color: #c4c4c4; }
+.code-block .token-comment { color: #444; }
+
+/* 2-col layout for some sections */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-8);
+}
+
+@media (max-width: 900px) {
+  .sidebar { width: 180px; }
+  .main { margin-left: 180px; }
+  .two-col { grid-template-columns: 1fr; }
+  .person-item { grid-template-columns: 1fr; gap: var(--sp-4); }
+  .motion-demo { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .sidebar { transform: translateX(-100%); }
+  .main { margin-left: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================
+  SIDEBAR NAVIGATION
+============================= -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <h1>Yamauchi No.10<br>Design System</h1>
+    <p>v1.0 · 2026</p>
+  </div>
+  <nav>
+    <span class="nav-group-label">Overview</span>
+    <a href="#intro">Introduction</a>
+    <a href="#site-preview">Site Preview</a>
+
+    <span class="nav-group-label">Tokens</span>
+    <a href="#colors">Color System</a>
+    <a href="#typography">Typography</a>
+    <a href="#spacing">Spacing & Sizing</a>
+    <a href="#borders">Borders & Radius</a>
+    <a href="#shadow">Shadow & Depth</a>
+    <a href="#motion">Motion & Easing</a>
+
+    <span class="nav-group-label">Components</span>
+    <a href="#nav">Navigation</a>
+    <a href="#splash">Splash Screen</a>
+    <a href="#sections">Section Headers</a>
+    <a href="#philosophy">Philosophy Cards</a>
+    <a href="#persons">Person Cards</a>
+    <a href="#activities">Activity Items</a>
+    <a href="#contact">Contact</a>
+    <a href="#footer">Footer</a>
+
+    <span class="nav-group-label">Reference</span>
+    <a href="#css-vars">CSS Variables</a>
+    <a href="#patterns">Layout Patterns</a>
+    <a href="#iconography">Iconography</a>
+  </nav>
+</aside>
+
+<!-- ============================
+  MAIN CONTENT
+============================= -->
+<main class="main">
+
+  <!-- INTRO -->
+  <section id="intro" class="ds-intro">
+    <div class="ds-intro-eyebrow">Design System · Yamauchi No.10 Family Office · y-n10.com</div>
+    <h1 class="ds-intro-title">A Monochrome<br>Editorial System.</h1>
+    <p class="ds-intro-sub">Reverse-engineered from the award-winning y-n10.com site by mount inc. A strict black-and-white Japanese editorial design language built for cinematic, scroll-driven storytelling. Awwwards SOTD — CSS Design Awards WOTY 2021 Nominee.</p>
+    <div class="ds-intro-meta">
+      <div class="ds-meta-item">
+        <div class="ds-meta-label">Source</div>
+        <div class="ds-meta-value">y-n10.com</div>
+      </div>
+      <div class="ds-meta-item">
+        <div class="ds-meta-label">Built by</div>
+        <div class="ds-meta-value">mount inc. (米道昌弘)</div>
+      </div>
+      <div class="ds-meta-item">
+        <div class="ds-meta-label">Primary Color</div>
+        <div class="ds-meta-value">#000000 — 1 chromatic color</div>
+      </div>
+      <div class="ds-meta-item">
+        <div class="ds-meta-label">Languages</div>
+        <div class="ds-meta-value">Japanese + English (bilingual)</div>
+      </div>
+      <div class="ds-meta-item">
+        <div class="ds-meta-label">Awards</div>
+        <div class="ds-meta-value">Awwwards SOTD · CSSDA WOTY</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITE PREVIEW -->
+  <section id="site-preview" class="ds-section">
+    <div class="section-eyebrow">01 — Site Preview</div>
+    <h2 class="section-title">Rendered Components</h2>
+    <p class="section-desc">Full fidelity component renderings matching the visual language of y-n10.com. Every component uses only extracted token values.</p>
+
+    <!-- Splash/Hero -->
+    <div class="demo-label">Hero / Splash Screen</div>
+    <div class="hero-ref">
+      <div class="hero-noise"></div>
+      <div class="hero-nav-preview">
+        <span>Yamauchi No.10 Family Office</span>
+        <span style="display:flex;gap:32px;">
+          <span>Statement</span><span>Legacy</span><span>Philosophy</span><span>About</span>
+        </span>
+      </div>
+      <div class="hero-logo">Yamauchi<br>No.10</div>
+      <div class="hero-tagline">Since 2020</div>
+      <button class="btn-enter">Enter</button>
+      <div class="hero-sound-notice">
+        このサイトは音が流れます。Sound is played on this site.
+      </div>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section id="colors" class="ds-section">
+    <div class="section-eyebrow">02 — Color System</div>
+    <h2 class="section-title">Monochrome Palette</h2>
+    <p class="section-desc">The site uses exactly 1 chromatic color: black (#000000). All depth, hierarchy, and contrast is achieved through black, white, and opacity values. Awwwards confirmed: "Color palette of 1 color — HEX #000."</p>
+
+    <!-- Core Duo -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin-bottom:var(--sp-6);">
+      <div class="token-card">
+        <div class="token-swatch" style="background:#000000;height:120px;border-bottom:1px solid rgba(255,255,255,0.08);">
+          <span class="swatch-label" style="color:rgba(255,255,255,0.3);">Primary Background</span>
+        </div>
+        <div class="token-info">
+          <div class="token-name">--color-bg / color.black</div>
+          <div class="token-value">#000000 · rgb(0,0,0)</div>
+          <div class="token-desc">Site background, section fills, navigation, footer</div>
+        </div>
+      </div>
+      <div class="token-card" style="border:1px solid #333;">
+        <div class="token-swatch" style="background:#ffffff;height:120px;border-bottom:1px solid #e0e0e0;">
+          <span class="swatch-label" style="color:rgba(0,0,0,0.4);">Primary Foreground</span>
+        </div>
+        <div class="token-info">
+          <div class="token-name">--color-fg / color.white</div>
+          <div class="token-value">#ffffff · rgb(255,255,255)</div>
+          <div class="token-desc">All body text, headings, UI labels, icons</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gray Scale -->
+    <div style="margin-bottom:var(--sp-4);font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-expanded);color:var(--color-gray-600);text-transform:uppercase;">Gray Scale</div>
+    <div class="token-grid" style="grid-template-columns:repeat(5,1fr);">
+      <div class="token-card">
+        <div class="token-swatch" style="background:#9b9b9b;"></div>
+        <div class="token-info">
+          <div class="token-name">gray-400</div>
+          <div class="token-value">#9b9b9b</div>
+          <div class="token-desc">Secondary text, muted labels</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#767676;"></div>
+        <div class="token-info">
+          <div class="token-name">gray-500</div>
+          <div class="token-value">#767676</div>
+          <div class="token-desc">Nav items (inactive)</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#555555;"></div>
+        <div class="token-info">
+          <div class="token-name">gray-600</div>
+          <div class="token-value">#555555</div>
+          <div class="token-desc">Section labels, eyebrows</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#333333;"></div>
+        <div class="token-info">
+          <div class="token-name">gray-700</div>
+          <div class="token-value">#333333</div>
+          <div class="token-desc">Sidebar labels</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#1a1a1a;"></div>
+        <div class="token-info">
+          <div class="token-name">gray-800</div>
+          <div class="token-value">#1a1a1a</div>
+          <div class="token-desc">Elevated surfaces</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Semantic + Opacity -->
+    <div style="margin-top:var(--sp-8);margin-bottom:var(--sp-4);font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-expanded);color:var(--color-gray-600);text-transform:uppercase;">Opacity & Border Tokens</div>
+    <div class="token-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="token-card">
+        <div class="token-swatch" style="background:rgba(255,255,255,0.12);border-bottom:var(--border-default);"></div>
+        <div class="token-info">
+          <div class="token-name">--color-border</div>
+          <div class="token-value">rgba(255,255,255,0.12)</div>
+          <div class="token-desc">Default borders, dividers</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:rgba(255,255,255,0.06);border-bottom:var(--border-default);"></div>
+        <div class="token-info">
+          <div class="token-name">--color-border-sub</div>
+          <div class="token-value">rgba(255,255,255,0.06)</div>
+          <div class="token-desc">Section separators</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:rgba(255,255,255,0.30);border-bottom:var(--border-default);"></div>
+        <div class="token-info">
+          <div class="token-name">--color-border-strong</div>
+          <div class="token-value">rgba(255,255,255,0.30)</div>
+          <div class="token-desc">Enter button ring, active states</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section id="typography" class="ds-section">
+    <div class="section-eyebrow">03 — Typography</div>
+    <h2 class="section-title">Type System</h2>
+    <p class="section-desc">Bilingual JP/EN system. Cormorant Garamond for English display. Noto Serif JP for Japanese text. JetBrains Mono for numerical indices and labels. Helvetica Neue for UI chrome.</p>
+
+    <!-- Font Families -->
+    <div style="margin-bottom:var(--sp-4);font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-expanded);color:var(--color-gray-600);text-transform:uppercase;">Font Families</div>
+
+    <div class="type-specimen">
+      <div class="type-label">
+        <span>--font-display</span>
+        <span>Cormorant Garamond · Display serif</span>
+        <span>EN headings, person names, CTAs</span>
+      </div>
+      <div style="font-family:var(--font-display);font-size:clamp(2.5rem,5vw,5rem);font-weight:300;line-height:1.1;letter-spacing:-0.025em;color:#fff;" class="type-specimen-text">Dream. Leap. Live.</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-label">
+        <span>--font-japanese</span>
+        <span>Noto Serif JP · Serif (JP body/headings)</span>
+        <span>Japanese sections, body text</span>
+      </div>
+      <div style="font-family:var(--font-japanese);font-size:clamp(1.5rem,4vw,3rem);font-weight:300;line-height:1.3;letter-spacing:0.05em;color:#fff;" class="type-specimen-text">挑戦と、生きていく。</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-label">
+        <span>--font-display-alt</span>
+        <span>Helvetica Neue · Grotesque</span>
+        <span>UI chrome, navigation, body EN</span>
+      </div>
+      <div style="font-family:var(--font-display-alt);font-size:clamp(1rem,2vw,1.5rem);font-weight:300;line-height:1.5;letter-spacing:0;color:#fff;" class="type-specimen-text">Yamauchi No.10 Family Office</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-label">
+        <span>--font-mono</span>
+        <span>JetBrains Mono · Monospace</span>
+        <span>Section numbers, index labels</span>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:clamp(0.75rem,1.5vw,1rem);font-weight:400;line-height:1;letter-spacing:0.3em;color:var(--color-gray-400);text-transform:uppercase;" class="type-specimen-text">01. Statement &nbsp; 02. Legacy &nbsp; 03. Philosophy &nbsp; 04. About</div>
+    </div>
+
+    <!-- Size Scale -->
+    <div style="margin-top:var(--sp-10);margin-bottom:var(--sp-4);font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-expanded);color:var(--color-gray-600);text-transform:uppercase;">Size Scale</div>
+
+    <div style="background:#000;border:var(--border-default);padding:var(--sp-8);">
+      <div style="display:grid;gap:var(--sp-6);">
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">display</span>
+          <span style="font-family:var(--font-display);font-size:clamp(3.75rem,8vw,10rem);font-weight:300;line-height:1;letter-spacing:-0.05em;color:#fff;">Aa</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">clamp(3.75rem, 8vw, 10rem) · 60–160px</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">7xl</span>
+          <span style="font-family:var(--font-display);font-size:var(--size-7xl);font-weight:300;line-height:1;letter-spacing:-0.025em;color:#fff;">Aa</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">6rem · 96px</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">5xl</span>
+          <span style="font-family:var(--font-display);font-size:var(--size-5xl);font-weight:300;line-height:1.1;color:#fff;">Aa</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">3.75rem · 60px</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">3xl</span>
+          <span style="font-family:var(--font-display);font-size:var(--size-3xl);font-weight:300;line-height:1.1;color:#fff;">Aa</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">2.25rem · 36px</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">xl</span>
+          <span style="font-family:var(--font-display);font-size:var(--size-xl);font-weight:300;line-height:1.1;color:#fff;">Aa</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">1.5rem · 24px</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">base</span>
+          <span style="font-family:var(--font-japanese);font-size:var(--size-base);line-height:var(--leading-japanese);color:var(--color-gray-300);">山内溥のレガシーである「独創性」、「チャレンジ精神」を継承していく。</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">1rem · 16px · Noto Serif JP</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">xs</span>
+          <span style="font-family:var(--font-display-alt);font-size:var(--size-xs);color:var(--color-gray-400);">We must continue the legacy that Hiroshi Yamauchi built.</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">0.75rem · 12px</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:var(--sp-4);">
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);width:80px;flex-shrink:0;">2xs</span>
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-expanded);color:var(--color-gray-500);text-transform:uppercase;">SECTION LABEL · INDEX</span>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">~9px · mono + expanded tracking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter Spacing -->
+    <div style="margin-top:var(--sp-10);margin-bottom:var(--sp-4);font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-expanded);color:var(--color-gray-600);text-transform:uppercase;">Letter Spacing</div>
+    <div style="background:#000;border:var(--border-default);padding:var(--sp-8);display:grid;gap:var(--sp-5);">
+      <div><span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);display:inline-block;width:120px;">tighter −0.05em</span> <span style="font-family:var(--font-display-alt);font-size:var(--size-lg);letter-spacing:-0.05em;color:#fff;">Yamauchi</span></div>
+      <div><span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);display:inline-block;width:120px;">tight −0.025em</span> <span style="font-family:var(--font-display-alt);font-size:var(--size-lg);letter-spacing:-0.025em;color:#fff;">Yamauchi</span></div>
+      <div><span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);display:inline-block;width:120px;">normal 0em</span> <span style="font-family:var(--font-display-alt);font-size:var(--size-base);letter-spacing:0;color:#fff;">Navigation item</span></div>
+      <div><span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);display:inline-block;width:120px;">wide 0.05em</span> <span style="font-family:var(--font-japanese);font-size:var(--size-base);letter-spacing:0.05em;color:#fff;">山内家の使命</span></div>
+      <div><span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);display:inline-block;width:120px;">wider 0.1em</span> <span style="font-family:var(--font-display-alt);font-size:var(--size-xs);letter-spacing:0.1em;color:var(--color-gray-400);">Since 2020</span></div>
+      <div><span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);display:inline-block;width:120px;">expanded 0.3em</span> <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.3em;color:var(--color-gray-500);text-transform:uppercase;">ACTIVITIES</span></div>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section id="spacing" class="ds-section">
+    <div class="section-eyebrow">04 — Spacing & Sizing</div>
+    <h2 class="section-title">Space Scale</h2>
+    <p class="section-desc">4px base unit. 12-step scale covering all UI spacing needs. Section padding uses fluid clamp() for responsive full-bleed design.</p>
+
+    <div style="background:#000;border:var(--border-default);padding:var(--sp-8);">
+      <div style="display:grid;gap:var(--sp-3);">
+        <div class="spacing-row"><div class="spacing-info">sp-1 · 4px</div><div class="spacing-bar" style="width:4px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-2 · 8px</div><div class="spacing-bar" style="width:8px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-3 · 12px</div><div class="spacing-bar" style="width:12px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-4 · 16px</div><div class="spacing-bar" style="width:16px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-6 · 24px</div><div class="spacing-bar" style="width:24px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-8 · 32px</div><div class="spacing-bar" style="width:32px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-10 · 40px</div><div class="spacing-bar" style="width:40px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-12 · 48px</div><div class="spacing-bar" style="width:48px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-16 · 64px</div><div class="spacing-bar" style="width:64px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-20 · 80px</div><div class="spacing-bar" style="width:80px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-24 · 96px</div><div class="spacing-bar" style="width:96px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-32 · 128px</div><div class="spacing-bar" style="width:128px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-40 · 160px</div><div class="spacing-bar" style="width:160px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-48 · 192px</div><div class="spacing-bar" style="width:192px;"></div></div>
+        <div class="spacing-row"><div class="spacing-info">sp-64 · 256px</div><div class="spacing-bar" style="width:256px;"></div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-10);">
+      <div style="margin-bottom:var(--sp-4);font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-expanded);color:var(--color-gray-600);text-transform:uppercase;">Layout & Breakpoints</div>
+      <div class="token-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Container (primary)</div>
+            <div class="token-value">max-width: 1440px</div>
+            <div class="token-desc">--layout-container-2xl</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Section Padding X</div>
+            <div class="token-value">clamp(24px, 5vw, 80px)</div>
+            <div class="token-desc">--section-px — fluid responsive</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Section Height</div>
+            <div class="token-value">100vh / 100dvh</div>
+            <div class="token-desc">Full-screen section architecture</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Mobile</div>
+            <div class="token-value">390px (iPhone 14)</div>
+            <div class="token-desc">Mobile baseline breakpoint</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Desktop</div>
+            <div class="token-value">1024px</div>
+            <div class="token-desc">Layout shift breakpoint</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Wide</div>
+            <div class="token-value">1440px</div>
+            <div class="token-desc">Primary design width</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BORDERS -->
+  <section id="borders" class="ds-section">
+    <div class="section-eyebrow">05 — Borders & Radius</div>
+    <h2 class="section-title">Edges</h2>
+    <p class="section-desc">Zero radius is the dominant pattern — the site uses sharp, unrounded corners throughout. Borders are subtle at 12% white opacity.</p>
+
+    <div class="demo-label">Border Weights</div>
+    <div class="border-row">
+      <div class="border-swatch" style="border:1px solid rgba(255,255,255,0.12);">border-default<br><span style="color:var(--color-gray-600);">rgba(255,255,255,0.12)</span></div>
+      <div class="border-swatch" style="border:1px solid rgba(255,255,255,0.06);">border-section<br><span style="color:var(--color-gray-600);">rgba(255,255,255,0.06)</span></div>
+      <div class="border-swatch" style="border:1px solid rgba(255,255,255,0.30);">border-strong<br><span style="color:var(--color-gray-600);">rgba(255,255,255,0.30)</span></div>
+      <div class="border-swatch" style="border:2px solid rgba(255,255,255,0.12);">border 2px</div>
+    </div>
+
+    <div class="demo-label" style="margin-top:var(--sp-8);">Border Radius (mostly 0)</div>
+    <div class="border-row">
+      <div style="width:60px;height:60px;background:rgba(255,255,255,0.1);border:var(--border-default);border-radius:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:9px;color:var(--color-gray-500);">none<br>0px</div>
+      <div style="width:60px;height:60px;background:rgba(255,255,255,0.1);border:var(--border-default);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:9px;color:var(--color-gray-500);">sm<br>2px</div>
+      <div style="width:60px;height:60px;background:rgba(255,255,255,0.1);border:var(--border-default);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:9px;color:var(--color-gray-500);">md<br>4px</div>
+      <div style="width:60px;height:60px;background:rgba(255,255,255,0.1);border:var(--border-default);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:9px;color:var(--color-gray-500);">lg<br>8px</div>
+      <div style="width:60px;height:60px;background:rgba(255,255,255,0.1);border:var(--border-default);border-radius:9999px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:9px;color:var(--color-gray-500);border-radius:9999px;">full<br>Enter btn</div>
+    </div>
+  </section>
+
+  <!-- SHADOW -->
+  <section id="shadow" class="ds-section">
+    <div class="section-eyebrow">06 — Shadow & Depth</div>
+    <h2 class="section-title">Depth System</h2>
+    <p class="section-desc">Dark-background site. Depth is achieved through transparency, blur, and stacking rather than drop shadows. Film grain texture adds cinematic depth.</p>
+
+    <div class="token-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="token-card">
+        <div class="token-swatch" style="background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
+          <div style="width:80px;height:40px;background:rgba(255,255,255,0.1);box-shadow:0 0 40px rgba(255,255,255,0.08);"></div>
+        </div>
+        <div class="token-info">
+          <div class="token-name">shadow.glow.white</div>
+          <div class="token-value">0 0 40px rgba(255,255,255,0.08)</div>
+          <div class="token-desc">Subtle white glow for hover/focus states</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;">
+          <div style="width:80px;height:40px;background:rgba(255,255,255,0.1);box-shadow:0 2px 20px rgba(0,0,0,0.5);"></div>
+        </div>
+        <div class="token-info">
+          <div class="token-name">shadow.text.subtle</div>
+          <div class="token-value">0 2px 20px rgba(0,0,0,0.5)</div>
+          <div class="token-desc">Text legibility on video/WebGL bg</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-8);">
+      <div class="demo-label">Film Grain Texture</div>
+      <div style="background:#000;border:var(--border-default);height:200px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+        <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\");opacity:0.05;pointer-events:none;background-size:200px 200px;mix-blend-mode:overlay;"></div>
+        <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:var(--tracking-wider);color:var(--color-gray-600);">FILM GRAIN · opacity: 0.04–0.06 · mix-blend-mode: overlay</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section id="motion" class="ds-section">
+    <div class="section-eyebrow">07 — Motion & Easing</div>
+    <h2 class="section-title">Cinematic Motion</h2>
+    <p class="section-desc">Deliberate, film-like transitions. No spring physics. The dramatic ease (0.76, 0, 0.24, 1) is used for all major reveals. Hover: interact with the boxes below.</p>
+
+    <div class="motion-demo">
+      <div class="motion-item">
+        <div class="motion-box motion-box-film"></div>
+        <div class="motion-label">film · ease</div>
+        <div class="motion-value">300ms · cubic-bezier(0.25, 0.1, 0.25, 1)</div>
+        <div class="motion-value" style="margin-top:4px;color:var(--color-gray-700);">Hover to lift</div>
+      </div>
+      <div class="motion-item">
+        <div class="motion-box motion-box-dramatic" style="transition:transform var(--dur-slow) var(--ease-dramatic),border-color var(--dur-slow) var(--ease-dramatic);"></div>
+        <div class="motion-label">dramatic · reveal</div>
+        <div class="motion-value">600ms · cubic-bezier(0.76, 0, 0.24, 1)</div>
+        <div class="motion-value" style="margin-top:4px;color:var(--color-gray-700);">Hover to scale</div>
+      </div>
+      <div class="motion-item">
+        <div class="motion-box motion-box-fast" style="transition:opacity var(--dur-fast) var(--ease-film);"></div>
+        <div class="motion-label">fast · fade</div>
+        <div class="motion-value">150ms · ease-film</div>
+        <div class="motion-value" style="margin-top:4px;color:var(--color-gray-700);">Hover to fade</div>
+      </div>
+      <div class="motion-item">
+        <div class="motion-box motion-box-cinematic"></div>
+        <div class="motion-label">cinematic · rotate</div>
+        <div class="motion-value">1200ms · cubic-bezier(0.76, 0, 0.24, 1)</div>
+        <div class="motion-value" style="margin-top:4px;color:var(--color-gray-700);">Hover to rotate</div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-10);">
+      <div class="demo-label">Duration Scale</div>
+      <div style="display:grid;gap:var(--sp-4);background:#000;border:var(--border-default);padding:var(--sp-8);">
+        <div style="display:flex;align-items:center;gap:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--color-gray-500);width:120px;">fast · 150ms</span>
+          <div style="height:1px;background:rgba(255,255,255,0.2);width:150px;"></div>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">Hover states, opacity transitions</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--color-gray-500);width:120px;">normal · 300ms</span>
+          <div style="height:1px;background:rgba(255,255,255,0.2);width:300px;"></div>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">UI transitions, underline grows</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--color-gray-500);width:120px;">slow · 600ms</span>
+          <div style="height:1px;background:rgba(255,255,255,0.2);width:400px;"></div>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">Element reveals, enter button</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--color-gray-500);width:120px;">cinematic · 1200ms</span>
+          <div style="height:1px;background:rgba(255,255,255,0.2);width:min(600px, 60%);"></div>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">Page transitions, section reveals</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:10px;color:var(--color-gray-500);width:120px;">epic · 2000ms</span>
+          <div style="height:2px;background:rgba(255,255,255,0.15);width:min(100%, 400px);"></div>
+          <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">Splash screen, WebGL intro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAV COMPONENT -->
+  <section id="nav" class="ds-section">
+    <div class="section-eyebrow">08 — Navigation</div>
+    <h2 class="section-title">Navigation Bar</h2>
+    <p class="section-desc">Fixed top bar. Transparent background over hero. Logo left, section links center, controls (View/Sound) right. All text in expanded-tracking mono caps.</p>
+
+    <div class="nav-demo">
+      <div class="nav-logo-demo">Yamauchi No.10 Family Office</div>
+      <ul class="nav-items-demo">
+        <li><a href="#">Statement</a></li>
+        <li><a href="#">Legacy</a></li>
+        <li><a href="#">Philosophy</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+      <div class="nav-controls">
+        <span>View</span>
+        <span>Sound</span>
+      </div>
+    </div>
+
+    <div class="code-block" style="margin-top:var(--sp-6);">
+<span class="token-comment">/* Navigation tokens */</span>
+<span class="token-prop">font-family</span>: <span class="token-val">var(--font-mono)</span>;
+<span class="token-prop">font-size</span>: <span class="token-val">9px</span>;
+<span class="token-prop">letter-spacing</span>: <span class="token-val">var(--tracking-wider)</span>; <span class="token-comment">/* 0.1em */</span>
+<span class="token-prop">text-transform</span>: <span class="token-val">uppercase</span>;
+<span class="token-prop">color</span>: <span class="token-val">var(--color-gray-400)</span>; <span class="token-comment">/* inactive */</span>
+<span class="token-prop">color</span>: <span class="token-val">var(--color-fg)</span>; <span class="token-comment">/* active/hover */</span>
+<span class="token-prop">transition</span>: <span class="token-val">color var(--dur-normal) var(--ease-film)</span>;
+    </div>
+  </section>
+
+  <!-- SPLASH SCREEN -->
+  <section id="splash" class="ds-section">
+    <div class="section-eyebrow">09 — Splash Screen</div>
+    <h2 class="section-title">Entry Experience</h2>
+    <p class="section-desc">Full-screen entry with WebGL background. Bilingual sound notice. Circular "Enter" button with ring-pulse hover animation. Described by reviewers as "a delightful single-page scroller living in a video game world."</p>
+
+    <div style="background:#000;border:var(--border-default);padding:var(--sp-20);text-align:center;position:relative;overflow:hidden;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-6);">
+      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,4rem);font-weight:300;color:#fff;line-height:1.1;letter-spacing:-0.025em;">Yamauchi No.10<br>Family Office</div>
+      <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.3em;color:var(--color-gray-500);text-transform:uppercase;">Since 2020</div>
+      <button class="btn-enter" style="margin:var(--sp-4) auto;">Enter</button>
+      <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;color:var(--color-gray-600);margin-top:var(--sp-4);">このサイトは音が流れます。 Sound is played on this site.</div>
+    </div>
+
+    <div class="code-block">
+<span class="token-comment">/* Enter button */</span>
+<span class="token-prop">width/height</span>: <span class="token-val">80px</span>;
+<span class="token-prop">border</span>: <span class="token-val">1px solid rgba(255,255,255,0.4)</span>;
+<span class="token-prop">border-radius</span>: <span class="token-val">9999px</span>; <span class="token-comment">/* full circle */</span>
+<span class="token-prop">transition</span>: <span class="token-val">border-color var(--dur-normal), transform var(--dur-slow) var(--ease-film)</span>;
+<span class="token-comment">/* hover: border-color → rgba(255,255,255,0.9), scale(1.05) */</span>
+    </div>
+  </section>
+
+  <!-- SECTION HEADERS -->
+  <section id="sections" class="ds-section">
+    <div class="section-eyebrow">10 — Section Headers</div>
+    <h2 class="section-title">Section Anatomy</h2>
+    <p class="section-desc">Four numbered sections (01–04). Each has: index number in mono caps, Japanese title, English title. Strong typographic contrast between the two languages.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="section-demo">
+          <div class="sec-index">01. STATEMENT</div>
+          <div class="sec-title-jp">挑戦と、生きていく。</div>
+          <div class="sec-title-en">Dream. Leap. Live.</div>
+          <p class="sec-body-jp">私たちは、もっと自由に挑戦できる未来を叶えるため、投資をはじめとするさまざまなアクションを実行していく。</p>
+          <p class="sec-body-en">Japan was once globally renowned for its people's quality of unique creativity teamed with a pioneering mindset.</p>
+        </div>
+      </div>
+      <div>
+        <div class="section-demo">
+          <div class="sec-index">02. LEGACY</div>
+          <div class="sec-title-jp">継承。そして使命。</div>
+          <div class="sec-title-en">Our family journey.</div>
+          <p class="sec-body-jp">1889年、山内房治郎が京都市下京区にて花札の製造を開始した。</p>
+          <p class="sec-body-en">In 1889, Fusajiro Yamauchi began producing Hanafuda playing cards in Shimogyo-ku, Kyoto.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+<span class="token-comment">/* Section index number */</span>
+<span class="token-prop">font-family</span>: <span class="token-val">var(--font-mono)</span>;
+<span class="token-prop">font-size</span>: <span class="token-val">var(--size-xs)</span>; <span class="token-comment">/* 12px */</span>
+<span class="token-prop">letter-spacing</span>: <span class="token-val">var(--tracking-expanded)</span>; <span class="token-comment">/* 0.3em */</span>
+<span class="token-prop">color</span>: <span class="token-val">var(--color-gray-500)</span>;
+<span class="token-comment">/* JP title */</span>
+<span class="token-prop">font-family</span>: <span class="token-val">var(--font-japanese)</span>;
+<span class="token-prop">font-size</span>: <span class="token-val">clamp(2.25rem, 5vw, 4.5rem)</span>;
+<span class="token-prop">font-weight</span>: <span class="token-val">300</span>;
+<span class="token-prop">letter-spacing</span>: <span class="token-val">0.05em</span>;
+<span class="token-comment">/* EN title */</span>
+<span class="token-prop">font-family</span>: <span class="token-val">var(--font-display)</span>;
+<span class="token-prop">font-size</span>: <span class="token-val">clamp(2.25rem, 4.5vw, 5rem)</span>;
+<span class="token-prop">font-weight</span>: <span class="token-val">300</span>;
+<span class="token-prop">letter-spacing</span>: <span class="token-val">-0.025em</span>;
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY CARDS -->
+  <section id="philosophy" class="ds-section">
+    <div class="section-eyebrow">11 — Philosophy Cards</div>
+    <h2 class="section-title">Philosophy List</h2>
+    <p class="section-desc">4 philosophy items in a numbered list. Giant ghost number (opacity ~12%) creates visual depth. Bilingual text pair. Top border separates items.</p>
+
+    <div class="demo-block">
+      <ul class="philosophy-list">
+        <li class="philosophy-item">
+          <div class="phil-number">1</div>
+          <div>
+            <p class="phil-body-jp">山内溥のレガシーである「独創性」、「チャレンジ精神」、「先見性」、「ユーザー目線の思考」を継承していく。</p>
+            <p class="phil-body-en">We must continue the legacy that Hiroshi Yamauchi built around creativity, boundary pushing, foresight, and consideration for the customer.</p>
+          </div>
+        </li>
+        <li class="philosophy-item">
+          <div class="phil-number">2</div>
+          <div>
+            <p class="phil-body-jp">チャレンジ精神をもって次代の社会課題に向き合うことで、常識にとらわれないイノベーションを起こし続ける。</p>
+            <p class="phil-body-en">We must proactively take on the social challenges faced by the next generation and continuously produce innovative ideas.</p>
+          </div>
+        </li>
+        <li class="philosophy-item">
+          <div class="phil-number">3</div>
+          <div>
+            <p class="phil-body-jp">リーダーシップをもって日本社会課題の解決の為に投資を行い、富を社会に還元することで社会と繋がっていく。</p>
+            <p class="phil-body-en">We must proactively make investments designed to tackle the social issues faced by Japan.</p>
+          </div>
+        </li>
+        <li class="philosophy-item">
+          <div class="phil-number">4</div>
+          <div>
+            <p class="phil-body-jp">山内家の発展のために、先祖から紡がれ次世代へと引き継いでいく一族資産を運用し、永続的な社会への貢献を目指す。</p>
+            <p class="phil-body-en">To expand the Yamauchi family legacy, we must apply the assets we have inherited from our ancestors.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PERSON CARDS -->
+  <section id="persons" class="ds-section">
+    <div class="section-eyebrow">12 — Person Cards</div>
+    <h2 class="section-title">Leadership Profiles</h2>
+    <p class="section-desc">Two-column list layout. Category label (FAMILY COUNCIL / EXECUTIVE OFFICERS) left. Japanese + English name pair right. Bio in small gray text. Hover: opacity 0.75.</p>
+
+    <div class="demo-block">
+      <ul class="person-list">
+        <li class="person-item">
+          <div class="person-meta">
+            <div class="person-category">Family Council</div>
+            <div class="person-role">Joint Representatives<br>共同代表者</div>
+          </div>
+          <div class="person-info">
+            <div class="person-name-jp">山内家一族</div>
+            <div class="person-name-en">Banjo Yamauchi & Family</div>
+            <p class="person-bio">Members of the family of the founder of Nintendo Co., Ltd. Members are based in Kyoto and Tokyo and active globally.</p>
+          </div>
+        </li>
+        <li class="person-item">
+          <div class="person-meta">
+            <div class="person-category">Executive Officers</div>
+            <div class="person-role">Chief Operating Officer<br>最高執行責任者</div>
+          </div>
+          <div class="person-info">
+            <div class="person-name-jp">市村吉也</div>
+            <div class="person-name-en">Yoshiya Ichimura</div>
+            <p class="person-bio">Yoshiya entered Nomura Asset Management in 1987. In 2021, he joined the Yamauchi No.10 Family Office as Chief Operating Officer.</p>
+          </div>
+        </li>
+        <li class="person-item">
+          <div class="person-meta">
+            <div class="person-category">Executive Officers</div>
+            <div class="person-role">Chief Investment Officer<br>最高投資責任者</div>
+          </div>
+          <div class="person-info">
+            <div class="person-name-jp">村上皓亮</div>
+            <div class="person-name-en">Hirowaka Murakami</div>
+            <p class="person-bio">After stints at Deutsche Bank Group and Goldman Sachs, Hirowaka joined the Yamauchi No.10 Family Office as Chief Investment Officer in 2020.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ACTIVITY ITEMS -->
+  <section id="activities" class="ds-section">
+    <div class="section-eyebrow">13 — Activity Items</div>
+    <h2 class="section-title">Activities List</h2>
+    <p class="section-desc">Three numbered activities under the ABOUT section. Index label, Japanese subtitle, English title, bilingual body text.</p>
+
+    <div class="demo-block">
+      <div class="activity-item" style="border-top:none;">
+        <div class="act-index">01. Business Incubation</div>
+        <div class="act-title-jp">アイデア・技術・事業開発</div>
+        <div class="act-title-en">Business Incubation</div>
+        <p class="sec-body-jp" style="max-width:640px;">私たちは自らの資産に常に意味を与えていく。意味・目的を持たない資産は、無機質な金銭へと形を変えてしまうからだ。</p>
+        <p class="sec-body-en" style="max-width:640px;">Assets that have no meaning or purpose simply turn into cold, lifeless cash — and that is why we at the Yamauchi No.10 Family Office are constantly looking for new meaning in our assets.</p>
+      </div>
+      <div class="activity-item">
+        <div class="act-index">02. Philanthropy</div>
+        <div class="act-title-jp">次世代への富と知見の還元</div>
+        <div class="act-title-en">Philanthropy</div>
+        <p class="sec-body-jp" style="max-width:640px;">私たちは自らの資産が築かれた背景を決して忘れない。</p>
+        <p class="sec-body-en" style="max-width:640px;">It is our duty to never forget where our assets come from. They come from the money spent by people around the world on products that have brought them hours of entertainment.</p>
+      </div>
+      <div class="activity-item">
+        <div class="act-index">03. Investment</div>
+        <div class="act-title-jp">投資活動(経営・資金支援)</div>
+        <div class="act-title-en">Investment</div>
+        <p class="sec-body-jp" style="max-width:640px;">私たちは投資によって、この国に挑戦を生み出していく。</p>
+        <p class="sec-body-en" style="max-width:640px;">Our goal is to use our investments to drive innovation in Japan. By being more proactive in the companies we invest in, we can achieve the kind of reforms needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="ds-section">
+    <div class="section-eyebrow">14 — Contact Section</div>
+    <h2 class="section-title">Contact</h2>
+    <p class="section-desc">Minimal contact section with category label and large display email link. Underline slides in on hover.</p>
+
+    <div class="contact-demo">
+      <div class="contact-label">Mail</div>
+      <a href="mailto:contact@y-n10.com" class="contact-email">contact@y-n10.com</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section id="footer" class="ds-section">
+    <div class="section-eyebrow">15 — Footer</div>
+    <h2 class="section-title">Footer</h2>
+    <p class="section-desc">Black footer with wordmark, section nav, social links with underline-grow hover. View/Sound toggles. Top border separates from body.</p>
+
+    <div class="footer-demo">
+      <div class="footer-top">
+        <div class="footer-wordmark">Yamauchi No.10 Family Office</div>
+        <ul class="footer-nav">
+          <li><a href="#">Statement</a></li>
+          <li><a href="#">Legacy</a></li>
+          <li><a href="#">Philosophy</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-social">
+          <a href="#">Twitter</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+        <div class="footer-controls">
+          <button>View</button>
+          <button>Sound</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CSS VARIABLES -->
+  <section id="css-vars" class="ds-section">
+    <div class="section-eyebrow">16 — CSS Variables</div>
+    <h2 class="section-title">:root Tokens</h2>
+    <p class="section-desc">Copy-paste ready CSS custom properties for any new project. Drop into :root to instantly adopt the Y-N10 design language.</p>
+
+    <div class="code-block" style="font-size:10px;line-height:2;">
+<span style="color:var(--color-gray-600);">/* ==============================
+   YAMAUCHI NO.10 — CSS TOKENS
+   ============================== */</span>
+<span style="color:var(--color-gray-500);">:root</span> {
+  <span style="color:var(--color-gray-600);">/* Colors */</span>
+  <span class="token-prop">--color-bg</span>:              <span class="token-val">#000000</span>;
+  <span class="token-prop">--color-fg</span>:              <span class="token-val">#ffffff</span>;
+  <span class="token-prop">--color-gray-400</span>:        <span class="token-val">#9b9b9b</span>;
+  <span class="token-prop">--color-gray-500</span>:        <span class="token-val">#767676</span>;
+  <span class="token-prop">--color-gray-600</span>:        <span class="token-val">#555555</span>;
+  <span class="token-prop">--color-border</span>:          <span class="token-val">rgba(255,255,255,0.12)</span>;
+  <span class="token-prop">--color-border-section</span>:  <span class="token-val">rgba(255,255,255,0.06)</span>;
+
+  <span style="color:var(--color-gray-600);">/* Typography */</span>
+  <span class="token-prop">--font-display</span>:      <span class="token-val">'Cormorant Garamond', serif</span>;
+  <span class="token-prop">--font-display-alt</span>:  <span class="token-val">'Helvetica Neue', Arial, sans-serif</span>;
+  <span class="token-prop">--font-japanese</span>:     <span class="token-val">'Noto Serif JP', 'Hiragino Mincho ProN', serif</span>;
+  <span class="token-prop">--font-jp-ui</span>:        <span class="token-val">'Noto Sans JP', sans-serif</span>;
+  <span class="token-prop">--font-mono</span>:         <span class="token-val">'JetBrains Mono', 'Courier New', monospace</span>;
+  <span class="token-prop">--size-display</span>:      <span class="token-val">clamp(3.75rem, 8vw, 10rem)</span>;
+  <span class="token-prop">--size-section</span>:      <span class="token-val">clamp(2.25rem, 5vw, 4.5rem)</span>;
+  <span class="token-prop">--tracking-expanded</span>: <span class="token-val">0.3em</span>;
+  <span class="token-prop">--leading-japanese</span>:  <span class="token-val">1.9</span>;
+
+  <span style="color:var(--color-gray-600);">/* Spacing */</span>
+  <span class="token-prop">--section-px</span>:  <span class="token-val">clamp(24px, 5vw, 80px)</span>;
+  <span class="token-prop">--section-py</span>:  <span class="token-val">clamp(80px, 10vh, 160px)</span>;
+  <span class="token-prop">--sp-4</span>: <span class="token-val">16px</span>;  <span class="token-prop">--sp-8</span>: <span class="token-val">32px</span>;  <span class="token-prop">--sp-12</span>: <span class="token-val">48px</span>;
+
+  <span style="color:var(--color-gray-600);">/* Motion */</span>
+  <span class="token-prop">--ease-film</span>:       <span class="token-val">cubic-bezier(0.25, 0.1, 0.25, 1)</span>;
+  <span class="token-prop">--ease-dramatic</span>:   <span class="token-val">cubic-bezier(0.76, 0, 0.24, 1)</span>;
+  <span class="token-prop">--dur-normal</span>:      <span class="token-val">300ms</span>;
+  <span class="token-prop">--dur-cinematic</span>:   <span class="token-val">1200ms</span>;
+}
+    </div>
+  </section>
+
+  <!-- PATTERNS -->
+  <section id="patterns" class="ds-section">
+    <div class="section-eyebrow">17 — Layout Patterns</div>
+    <h2 class="section-title">Composition System</h2>
+    <p class="section-desc">One-page vertical scroll. Each section fills 100vh. Content flows top-to-bottom: splash → statement → legacy → philosophy → about (activities + leadership) → contact → footer.</p>
+
+    <div style="background:#000;border:var(--border-default);padding:var(--sp-8);">
+      <div style="display:flex;flex-direction:column;gap:0;max-width:400px;">
+        <div style="border:var(--border-default);padding:var(--sp-6);position:relative;">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-600);">SPLASH · 100vh</span>
+          <div style="position:absolute;right:var(--sp-4);top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-size:9px;color:var(--color-gray-700);">Logo + Enter + Sound</div>
+        </div>
+        <div style="border:var(--border-default);border-top:none;padding:var(--sp-6);background:rgba(255,255,255,0.02);">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-600);">01. STATEMENT · min 100vh</span>
+        </div>
+        <div style="border:var(--border-default);border-top:none;padding:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-600);">02. LEGACY · min 100vh</span>
+        </div>
+        <div style="border:var(--border-default);border-top:none;padding:var(--sp-6);background:rgba(255,255,255,0.02);">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-600);">03. PHILOSOPHY · 4 items</span>
+        </div>
+        <div style="border:var(--border-default);border-top:none;padding:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-600);">04. ABOUT · Activities (3) + Leadership (6)</span>
+        </div>
+        <div style="border:var(--border-default);border-top:none;padding:var(--sp-6);background:rgba(255,255,255,0.02);">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-600);">CONTACT · email CTA</span>
+        </div>
+        <div style="border:var(--border-default);border-top:none;padding:var(--sp-6);">
+          <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-600);">FOOTER · nav + social + controls</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-10);">
+      <div class="demo-label">Grid System</div>
+      <div class="two-col" style="gap:var(--sp-4);">
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Columns</div>
+            <div class="token-value">12 col grid</div>
+            <div class="token-desc">Gutter: 32px desktop, 16px mobile</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Person / Philosophy</div>
+            <div class="token-value">grid: 180px 1fr (2-col)</div>
+            <div class="token-desc">Meta col + content col</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ICONOGRAPHY -->
+  <section id="iconography" class="ds-section" style="padding-bottom:var(--sp-32);">
+    <div class="section-eyebrow">18 — Iconography & Imagery</div>
+    <h2 class="section-title">Icon Language</h2>
+    <p class="section-desc">Minimal line-based icons. Social links are text-only (no icon sprites). Navigation arrows are thin single lines. Sound icon is abstract waveform or text toggle. No filled icons.</p>
+
+    <div class="two-col">
+      <div class="demo-block">
+        <div class="demo-label">Social Links (text-only)</div>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-4);">
+          <a href="#" style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-400);text-decoration:none;text-transform:uppercase;display:inline-flex;align-items:center;gap:var(--sp-3);transition:color 300ms;">
+            <span style="display:inline-block;width:16px;height:1px;background:currentColor;"></span>
+            Twitter
+          </a>
+          <a href="#" style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-400);text-decoration:none;text-transform:uppercase;display:inline-flex;align-items:center;gap:var(--sp-3);">
+            <span style="display:inline-block;width:16px;height:1px;background:currentColor;"></span>
+            Facebook
+          </a>
+          <a href="#" style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;color:var(--color-gray-400);text-decoration:none;text-transform:uppercase;display:inline-flex;align-items:center;gap:var(--sp-3);">
+            <span style="display:inline-block;width:16px;height:1px;background:currentColor;"></span>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-label">UI Controls</div>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-6);">
+          <div style="display:flex;align-items:center;gap:var(--sp-4);">
+            <div style="width:40px;height:40px;border:1px solid rgba(255,255,255,0.3);border-radius:9999px;display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:var(--font-mono);font-size:7px;letter-spacing:0.2em;color:#fff;">ENTER</span>
+            </div>
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);">Enter button — circle ring</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--sp-4);">
+            <div style="display:flex;gap:2px;align-items:flex-end;height:16px;">
+              <div style="width:2px;height:6px;background:rgba(255,255,255,0.5);"></div>
+              <div style="width:2px;height:10px;background:rgba(255,255,255,0.7);"></div>
+              <div style="width:2px;height:14px;background:rgba(255,255,255,0.9);"></div>
+              <div style="width:2px;height:10px;background:rgba(255,255,255,0.7);"></div>
+              <div style="width:2px;height:6px;background:rgba(255,255,255,0.5);"></div>
+            </div>
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--color-gray-600);">Sound toggle — waveform</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-10);">
+      <div class="demo-label">Imagery Treatment</div>
+      <div class="token-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">WebGL Background</div>
+            <div class="token-value">Three.js / custom shader</div>
+            <div class="token-desc">Scroll-responsive 3D particle system. z-index: 0, behind all content.</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Portrait Photos</div>
+            <div class="token-value">Not present in current version</div>
+            <div class="token-desc">Leadership profiles are text-only. If added: grayscale, square crop.</div>
+          </div>
+        </div>
+        <div class="token-card">
+          <div class="token-info" style="padding:var(--sp-4);">
+            <div class="token-name">Film Grain</div>
+            <div class="token-value">SVG noise, opacity: 0.04</div>
+            <div class="token-desc">Fixed overlay, mix-blend-mode: overlay, pointer-events: none</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// Sidebar active link tracking
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.sidebar nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

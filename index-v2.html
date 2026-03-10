@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brickwise Advisors — Startup Financial Advisory</title>
+  <meta name="description" content="Financial strategy and fractional CFO services for early-stage startups. Fundraising prep, financial modeling, and runway planning for founders.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='22' width='7' height='5' rx='1' fill='%23F24B3A'/><rect x='12' y='22' width='7' height='5' rx='1' fill='%23F24B3A'/><rect x='21' y='22' width='7' height='5' rx='1' fill='%23F24B3A'/><rect x='7' y='15' width='7' height='5' rx='1' fill='%23FF7A6E'/><rect x='17' y='15' width='7' height='5' rx='1' fill='%23FF7A6E'/><rect x='12' y='8' width='7' height='5' rx='1' fill='%23FFAD9E'/></svg>">
+
+  <!-- Google Fonts — different pairing: Space Grotesk + Instrument Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════════
+       V2 DESIGN — LIGHT, MINIMAL, SHARP
+       Palette: Near-black + White + Electric blue accent
+       Typography: Space Grotesk (headings) + Instrument Sans (body)
+       ══════════════════════════════════════ */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --v2-black: #0A0A0A;
+      --v2-dark: #1A1A1A;
+      --v2-gray-900: #262626;
+      --v2-gray-700: #404040;
+      --v2-gray-500: #737373;
+      --v2-gray-300: #D4D4D4;
+      --v2-gray-100: #F5F5F5;
+      --v2-white: #FAFAFA;
+      --v2-accent: #2563EB;
+      --v2-accent-light: #3B82F6;
+      --v2-accent-glow: rgba(37, 99, 235, 0.15);
+      --v2-green: #10B981;
+      --v2-font-display: 'Space Grotesk', sans-serif;
+      --v2-font-body: 'Instrument Sans', system-ui, sans-serif;
+      --v2-container: 1200px;
+      --v2-radius: 12px;
+      --v2-radius-lg: 20px;
+    }
+
+    body {
+      font-family: var(--v2-font-body);
+      color: var(--v2-gray-700);
+      background: var(--v2-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .v2-container {
+      width: 100%;
+      max-width: var(--v2-container);
+      margin-inline: auto;
+      padding-inline: 2rem;
+    }
+
+    /* ── NAV ── */
+    .v2-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+    }
+    .v2-nav.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+    .v2-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .v2-nav-brand {
+      font-family: var(--v2-font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--v2-black);
+      letter-spacing: -0.03em;
+    }
+    .v2-nav-brand span { color: var(--v2-accent); }
+    .v2-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .v2-nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--v2-gray-500);
+      transition: color 0.2s;
+    }
+    .v2-nav-link:hover, .v2-nav-link.active { color: var(--v2-black); }
+    .v2-nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--v2-font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--v2-black);
+      padding: 0.5rem 1.25rem;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .v2-nav-cta:hover { background: var(--v2-gray-900); transform: translateY(-1px); }
+
+    /* Mobile toggle */
+    .v2-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .v2-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--v2-black);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .v2-toggle span + span { margin-top: 5px; }
+    .v2-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3.5px, 3.5px); }
+    .v2-toggle.active span:nth-child(2) { opacity: 0; }
+    .v2-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3.5px, -3.5px); }
+
+    /* ── HERO ── */
+    .v2-hero {
+      padding: 8rem 0 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .v2-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--v2-accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .v2-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--v2-accent);
+      background: var(--v2-accent-glow);
+      padding: 0.375rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      margin-bottom: 2rem;
+    }
+    .v2-hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--v2-accent);
+    }
+    .v2-hero h1 {
+      font-family: var(--v2-font-display);
+      font-size: clamp(2.75rem, 6vw, 5rem);
+      font-weight: 700;
+      color: var(--v2-black);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      max-width: 800px;
+      margin-inline: auto;
+      margin-bottom: 1.5rem;
+    }
+    .v2-hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--v2-accent) 0%, var(--v2-accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .v2-hero-sub {
+      font-size: 1.125rem;
+      color: var(--v2-gray-500);
+      max-width: 560px;
+      margin-inline: auto;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .v2-hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .v2-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--v2-font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--v2-black);
+      padding: 0.875rem 2rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .v2-btn-primary:hover { background: var(--v2-gray-900); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .v2-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--v2-font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--v2-gray-700);
+      background: transparent;
+      padding: 0.8125rem 1.9375rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--v2-gray-300);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .v2-btn-secondary:hover { border-color: var(--v2-gray-500); background: rgba(0,0,0,0.02); }
+
+    /* ── STATS ── */
+    .v2-stats {
+      padding: 3rem 0;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .v2-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .v2-stat { text-align: center; }
+    .v2-stat-value {
+      font-family: var(--v2-font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--v2-black);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .v2-stat-value-sm {
+      font-family: var(--v2-font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--v2-black);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .v2-stat-label {
+      font-size: 0.8125rem;
+      color: var(--v2-gray-500);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTIONS ── */
+    .v2-section {
+      padding: 6rem 0;
+    }
+    .v2-section-alt {
+      background: var(--v2-gray-100);
+    }
+    .v2-section-dark {
+      background: var(--v2-black);
+      color: #fff;
+    }
+    .v2-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--v2-accent);
+      margin-bottom: 0.75rem;
+    }
+    .v2-section-title {
+      font-family: var(--v2-font-display);
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      color: var(--v2-black);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .v2-section-sub {
+      font-size: 1.0625rem;
+      color: var(--v2-gray-500);
+      line-height: 1.7;
+      max-width: 540px;
+    }
+    .v2-section-header {
+      text-align: center;
+      max-width: 600px;
+      margin-inline: auto;
+      margin-bottom: 4rem;
+    }
+    .v2-section-header .v2-section-sub {
+      margin-inline: auto;
+    }
+
+    /* ── SERVICES (Bento Grid) ── */
+    .v2-bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .v2-bento-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--v2-radius-lg);
+      padding: 2rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .v2-bento-card:hover {
+      border-color: rgba(37, 99, 235, 0.2);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+    .v2-bento-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--v2-accent-glow);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--v2-accent);
+    }
+    .v2-bento-card h4 {
+      font-family: var(--v2-font-display);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--v2-black);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .v2-bento-card p {
+      font-size: 0.9375rem;
+      color: var(--v2-gray-500);
+      line-height: 1.65;
+    }
+
+    /* ── ABOUT ── */
+    .v2-about-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .v2-about-photo {
+      border-radius: var(--v2-radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      position: relative;
+    }
+    .v2-about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .v2-about-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(0,0,0,0.08);
+      pointer-events: none;
+    }
+
+    /* ── MOONTOWER ── */
+    .v2-moontower {
+      background: var(--v2-black);
+      border-radius: var(--v2-radius-lg);
+      padding: 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .v2-moontower::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .v2-moontower-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.08);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+    .v2-moontower h2 {
+      font-family: var(--v2-font-display);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .v2-moontower p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      max-width: 540px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+    }
+    .v2-btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--v2-font-display);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--v2-black);
+      background: #fff;
+      padding: 0.75rem 1.75rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .v2-btn-white:hover { background: var(--v2-gray-100); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+    /* ── CTA ── */
+    .v2-cta-section {
+      text-align: center;
+      padding: 6rem 0;
+    }
+
+    /* ── FOOTER ── */
+    .v2-footer {
+      background: var(--v2-black);
+      color: rgba(255,255,255,0.4);
+      padding: 4rem 0 2rem;
+    }
+    .v2-footer-grid {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .v2-footer-brand {
+      font-family: var(--v2-font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .v2-footer-brand span { color: var(--v2-accent); }
+    .v2-footer-desc {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .v2-footer-heading {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 1rem;
+    }
+    .v2-footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+    .v2-footer-link {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .v2-footer-link:hover { color: #fff; }
+    .v2-footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .v2-bento { grid-template-columns: repeat(2, 1fr); }
+      .v2-footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .v2-toggle { display: flex; flex-direction: column; }
+      .v2-nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px;
+        left: 0; right: 0; bottom: 0;
+        background: rgba(250, 250, 250, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 2.5rem 1.5rem;
+        gap: 1.5rem;
+        z-index: 200;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: all 0.3s;
+      }
+      .v2-nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+      .v2-nav-links .v2-nav-link { font-size: 1.125rem; font-weight: 600; color: var(--v2-black); }
+
+      .v2-hero { padding: 5rem 0 4rem; }
+      .v2-stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .v2-bento { grid-template-columns: 1fr; }
+      .v2-about-grid { grid-template-columns: 1fr; }
+      .v2-about-photo { max-width: 360px; margin-inline: auto; }
+      .v2-moontower { padding: 3rem 1.5rem; }
+      .v2-footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .v2-footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <nav class="v2-nav" id="nav">
+      <div class="v2-container v2-nav-inner">
+        <a href="/" class="v2-nav-brand" aria-label="Brickwise Advisors home">
+          Brickwise<span>.</span>
+        </a>
+
+        <ul class="v2-nav-links" id="navLinks">
+          <li><a href="#services" class="v2-nav-link">Services</a></li>
+          <li><a href="#about"    class="v2-nav-link">About</a></li>
+          <li><a href="#moontower" class="v2-nav-link">Moontower</a></li>
+          <li><a href="#contact"  class="v2-nav-link">Contact</a></li>
+        </ul>
+
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener"
+             class="v2-nav-cta">Book a Call</a>
+          <button class="v2-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="v2-hero">
+      <div class="v2-container">
+        <div class="v2-hero-badge">Austin, Texas · For Founders</div>
+        <h1>The financial edge your <em>startup needs</em></h1>
+        <p class="v2-hero-sub">
+          Brickwise Advisors gives early-stage startups a fractional CFO and strategic
+          financial partner — so you can raise smarter, grow faster, and never run out
+          of runway.
+        </p>
+        <div class="v2-hero-actions">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="v2-btn-primary">
+            Schedule a Free Consultation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#services" class="v2-btn-secondary">See Our Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="v2-stats">
+      <div class="v2-container">
+        <div class="v2-stats-grid">
+          <div class="v2-stat reveal">
+            <div class="v2-stat-value-sm">Pre-Seed</div>
+            <div class="v2-stat-label">to Series B Focus</div>
+          </div>
+          <div class="v2-stat reveal reveal-delay-1">
+            <div class="v2-stat-value">10+</div>
+            <div class="v2-stat-label">Startups Advised</div>
+          </div>
+          <div class="v2-stat reveal reveal-delay-2">
+            <div class="v2-stat-value">48h</div>
+            <div class="v2-stat-label">Model Turnaround</div>
+          </div>
+          <div class="v2-stat reveal reveal-delay-3">
+            <div class="v2-stat-value">ATX</div>
+            <div class="v2-stat-label">Born & Building</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="v2-section v2-section-alt">
+      <div class="v2-container">
+        <div class="v2-section-header reveal">
+          <div class="v2-label">What We Do</div>
+          <div class="v2-section-title">Services built for founders</div>
+          <p class="v2-section-sub">From your first raise to your Series B, we embed alongside your
+            team as the financial partner that grows with you.</p>
+        </div>
+
+        <div class="v2-bento">
+          <div class="v2-bento-card reveal">
+            <div class="v2-bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h4>Fractional CFO</h4>
+            <p>C-suite financial leadership on a startup budget. Own your numbers,
+              board reporting, investor relations, and long-range strategy.</p>
+          </div>
+
+          <div class="v2-bento-card reveal reveal-delay-1">
+            <div class="v2-bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h4>Fundraising Readiness</h4>
+            <p>Pitch-ready financial models, data room structure, investor narrative,
+              and valuation prep — ready to close when VCs come knocking.</p>
+          </div>
+
+          <div class="v2-bento-card reveal reveal-delay-2">
+            <div class="v2-bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <h4>Financial Modeling</h4>
+            <p>Bottom-up revenue models, scenario analysis, cohort projections,
+              and unit economics dashboards that tell a story investors believe.</p>
+          </div>
+
+          <div class="v2-bento-card reveal">
+            <div class="v2-bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h4>Cap Table & Equity</h4>
+            <p>Cap table modeling, dilution analysis, option pool planning,
+              and SAFEs/convertible note structuring through every round.</p>
+          </div>
+
+          <div class="v2-bento-card reveal reveal-delay-1">
+            <div class="v2-bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h4>Runway & Cash Planning</h4>
+            <p>Real-time burn rate tracking, hiring plan stress-testing, and
+              dynamic runway forecasts for the next 18 months.</p>
+          </div>
+
+          <div class="v2-bento-card reveal reveal-delay-2">
+            <div class="v2-bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            </div>
+            <h4>Finance Ops & Infrastructure</h4>
+            <p>Build your finance stack from day one — FP&A tooling, reporting
+              frameworks, vendor selection, and ops that scale through due diligence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="v2-section">
+      <div class="v2-container">
+        <div class="v2-about-grid">
+          <div class="v2-about-photo reveal">
+            <img src="Zac_staff_photo_gift.jpg" alt="Zac, Founder — Brickwise Advisors">
+          </div>
+
+          <div class="reveal reveal-delay-1">
+            <div class="v2-label">Meet Zac</div>
+            <div class="v2-section-title" style="margin-bottom:1.25rem;">
+              A financial partner who speaks founder
+            </div>
+            <p style="font-size:1.0625rem;color:var(--v2-gray-500);line-height:1.75;margin-bottom:1.25rem;">
+              Zac has sat across the table from VCs, built financial models at 2am before
+              board meetings, and helped founders navigate the gap between traction and
+              term sheet.
+            </p>
+            <p style="font-size:0.9375rem;color:var(--v2-gray-500);line-height:1.75;margin-bottom:2rem;">
+              As a hands-on advisor with no hidden incentives,
+              Zac's only job is making sure your startup's finances are a strength —
+              not a liability — at every stage from pre-seed through Series B.
+            </p>
+            <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="v2-btn-primary">
+              Book a Free Intro Call
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOONTOWER -->
+    <section id="moontower" class="v2-section" style="padding-bottom:0;">
+      <div class="v2-container">
+        <div class="v2-moontower reveal">
+          <div class="v2-moontower-badge">Austin · UT Students</div>
+          <h2>The Moontower Society</h2>
+          <p>
+            An Austin-based organization connecting UT Austin students with the founders,
+            builders, and investors shaping Austin's early-stage tech ecosystem. Curated
+            speaker events, fireside chats, and community programming.
+          </p>
+          <a href="https://moontowersociety.com" target="_blank" rel="noopener" class="v2-btn-white">
+            Learn More at moontowersociety.com
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="v2-cta-section">
+      <div class="v2-container reveal">
+        <div class="v2-label">Get Started</div>
+        <div class="v2-section-title" style="max-width:500px;margin-inline:auto;margin-bottom:1rem;">
+          Let's talk about your startup's finances
+        </div>
+        <p class="v2-section-sub" style="max-width:480px;margin-inline:auto;margin-bottom:2.5rem;">
+          Book a free 30-minute intro call. Bring your deck, your burn rate questions,
+          or just a napkin sketch — we'll figure out where you need the most support.
+        </p>
+        <div class="v2-hero-actions">
+          <a href="https://calendly.com/brickwiseadvisors" target="_blank" rel="noopener" class="v2-btn-primary">
+            Schedule a Call
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="mailto:zac@brickwiseadvisors.com" class="v2-btn-secondary">Send an Email</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="v2-footer">
+    <div class="v2-container">
+      <div class="v2-footer-grid">
+        <div>
+          <div class="v2-footer-brand">Brickwise<span>.</span></div>
+          <p class="v2-footer-desc">
+            Fractional CFO and financial advisory services for early-stage startups.
+            Pre-seed to Series B. Austin-based, founder-obsessed.
+          </p>
+        </div>
+
+        <div>
+          <div class="v2-footer-heading">Services</div>
+          <ul class="v2-footer-links">
+            <li><a href="#services" class="v2-footer-link">Fractional CFO</a></li>
+            <li><a href="#services" class="v2-footer-link">Fundraising Readiness</a></li>
+            <li><a href="#services" class="v2-footer-link">Financial Modeling</a></li>
+            <li><a href="#services" class="v2-footer-link">Cap Table & Equity</a></li>
+            <li><a href="#services" class="v2-footer-link">Runway Planning</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="v2-footer-heading">Company</div>
+          <ul class="v2-footer-links">
+            <li><a href="#about"     class="v2-footer-link">About Zac</a></li>
+            <li><a href="#moontower" class="v2-footer-link">Moontower Society</a></li>
+            <li><a href="#contact"   class="v2-footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="v2-footer-heading">Connect</div>
+          <ul class="v2-footer-links">
+            <li><a href="https://calendly.com/brickwiseadvisors" class="v2-footer-link" target="_blank" rel="noopener">Book a Call</a></li>
+            <li><a href="mailto:zac@brickwiseadvisors.com" class="v2-footer-link">Email Us</a></li>
+            <li><a href="https://linkedin.com" class="v2-footer-link" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="v2-footer-bottom">
+        <span>&copy; 2026 Brickwise Advisors LLC. All rights reserved.</span>
+        <span>Austin, Texas &middot; Startup Financial Advisory</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('.v2-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 16);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Active nav
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 100;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        const link = document.querySelector(`.v2-nav-link[href="#${id}"]`);
+        if (link) link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+      });
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
