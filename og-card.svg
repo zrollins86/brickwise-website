@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background: aubergine gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#350B48"/>
+      <stop offset="100%" stop-color="#240630"/>
+    </linearGradient>
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Accent line at top -->
+  <rect x="0" y="0" width="1200" height="4" fill="#F24B3A"/>
+
+  <!-- Brick stack mark (centered, scaled up) -->
+  <g transform="translate(490, 140) scale(3.2)">
+    <!-- Row 1 (base): 4 bricks -->
+    <rect x="0"  y="38" width="10" height="8" rx="1.5" fill="#F24B3A"/>
+    <rect x="12" y="38" width="10" height="8" rx="1.5" fill="#F24B3A"/>
+    <rect x="24" y="38" width="10" height="8" rx="1.5" fill="#F24B3A"/>
+    <rect x="36" y="38" width="10" height="8" rx="1.5" fill="#F24B3A"/>
+    <!-- Row 2: 3 bricks -->
+    <rect x="6"  y="27" width="10" height="8" rx="1.5" fill="#FF7A6E"/>
+    <rect x="18" y="27" width="10" height="8" rx="1.5" fill="#FF7A6E"/>
+    <rect x="30" y="27" width="10" height="8" rx="1.5" fill="#FF7A6E"/>
+    <!-- Row 3: 2 bricks -->
+    <rect x="12" y="16" width="10" height="8" rx="1.5" fill="#FFAD9E"/>
+    <rect x="24" y="16" width="10" height="8" rx="1.5" fill="#FFAD9E"/>
+    <!-- Row 4 (apex): 1 brick -->
+    <rect x="18" y="5" width="10" height="8" rx="1.5" fill="white" opacity="0.85"/>
+  </g>
+
+  <!-- Wordmark: Brickwise -->
+  <text x="600" y="440"
+    font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif"
+    font-size="56"
+    font-weight="800"
+    letter-spacing="-1"
+    fill="#FFFFFF"
+    text-anchor="middle">Brickwise</text>
+
+  <!-- Subtitle: ADVISORS -->
+  <text x="600" y="475"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="22"
+    font-weight="500"
+    letter-spacing="6"
+    fill="#9E7DB5"
+    text-anchor="middle">ADVISORS</text>
+
+  <!-- Tagline -->
+  <text x="600" y="540"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="20"
+    font-weight="400"
+    fill="rgba(255,255,255,0.6)"
+    text-anchor="middle">Startup Financial Advisory &amp; Fractional CFO</text>
+</svg>
